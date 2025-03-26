@@ -71,13 +71,13 @@
                 <div class="col-12 col-md-6">
                     <div class="label">
                         <label>Nome do Solicitante:</label>
-                        <input pInputText [value]="form?.prayer?.from" disabled class="w-full" />
+                        <input pInputText [value]="form?.prayer?.to" disabled class="w-full" />
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="label">
                         <label>Oração para:</label>
-                        <input pInputText [value]="form.prayer?.to" disabled class="w-full" />
+                        <input pInputText [value]="form?.prayer?.from" disabled class="w-full" />
                     </div>
                 </div>
             </div>
@@ -105,7 +105,8 @@
             <div class="col-12 col-md-12">
                 <div class="label">
                     <label>Descrição:</label>
-                    <textarea class="w-full field-textarea" pInputTextarea disabled style="resize: none;" [value]="form.message"></textarea>
+                    <textarea class="w-full field-textarea" pInputTextarea disabled style="resize: none;"
+                        [value]="form.message"></textarea>
                 </div>
             </div>
         </div>

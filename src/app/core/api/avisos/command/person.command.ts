@@ -29,5 +29,5 @@ export class BirthdayCommand {
     }
 
     type: string;
-    age: number;
+    age: string;
 }

@@ -23,12 +23,13 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
     tipoAvisos = [
         { id: ENUMS.VISITANTE, name: 'visitante', tipo: 'VISITANTES' },
         { id: ENUMS.AVISO_RECADO, name: 'aviso', tipo: 'AVISOS / RECADOS' },
-        { id: ENUMS.ANIVERSARIO, name: 'aniversario', tipo: 'ANIVERSÁRIO' },
+        { id: ENUMS.ANIVERSARIO, name: 'aniversario', tipo: 'ANIVERSÁRIO DE VIDA' },
+        { id: ENUMS.ANIVERSARIO_CASAMENTO, name: 'aniversario', tipo: 'ANIVERSÁRIO DE CANSAMENTO' },
         { id: ENUMS.ORACAO, name: 'oracao', tipo: 'PEDIDO DE ORAÇÃO' },
         { id: ENUMS.APRESENTACAO, name: 'apresentacao', tipo: 'APRESENTAÇÃO CRIANÇA' }
     ]
 
-    camposObrigatorios:{ [key: string]: string[] } = {
+    camposObrigatorios: { [key: string]: string[] } = {
         visitante: ["visitante", "frenquentaIgreja"],
         aniversario: ["tipoAniversário", "idade", "aniversariante"],
         apresentacao: ["crianca", "pais"]
@@ -80,7 +81,7 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
     selectedTipo: number = 0;
     onChangeTipo = (event: any) => {
         this.avisoForm = new AvisoCommand();
-        
+
         if (this.data)
             this.avisoForm.id = this.data.id;
 

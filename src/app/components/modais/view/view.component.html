@@ -22,6 +22,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Tipo Visitante-->
         <div class="col-12" *ngIf="form.guestType === 1">
             <div class="row mt-4">
@@ -40,14 +41,13 @@
                 <div class="col-12 col-md-6" *ngIf="!form.person?.church?.attend">
                     <div class="label">
                         <label>Frenquenta alguma igreja:</label>
-                        <input pInputText value="O convidado não frenquenta nenhuma igreja!" disabled class="w-full" />
+                        <input pInputText value="Não" disabled class="w-full" />
                     </div>
                 </div>
             </div>
         </div>
 
-
-        <!-- TIPO ANIVERSARIO -->
+        <!-- TIPO ANIVERSARIO VIDA-->
         <div class="col-12" *ngIf="form.guestType === 3">
             <div class="row mt-4">
                 <div class="col-12 col-md-6">
@@ -58,7 +58,25 @@
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="label">
-                        <label>Nome do Casal:</label>
+                        <label>Nome do Aniversariante:</label>
+                        <input pInputText [value]="form.person.name" disabled class="w-full" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIPO ANIVERSARIO CASAMENTO -->
+        <div class="col-12" *ngIf="form.guestType === 6">
+            <div class="row mt-4">
+                <div class="col-12 col-md-6">
+                    <div class="label">
+                        <label>Quantos anos:</label>
+                        <input pInputText [value]="form?.person?.birthday?.age" disabled class="w-full" />
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="label">
+                        <label>Nome do Casal</label>
                         <input pInputText [value]="form.person.name" disabled class="w-full" />
                     </div>
                 </div>
@@ -71,13 +89,13 @@
                 <div class="col-12 col-md-6">
                     <div class="label">
                         <label>Nome do Solicitante:</label>
-                        <input pInputText [value]="form?.prayer?.from" disabled class="w-full" />
+                        <input pInputText [value]="form?.prayer?.to" disabled class="w-full" />
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="label">
                         <label>Oração para:</label>
-                        <input pInputText [value]="form.prayer?.to" disabled class="w-full" />
+                        <input pInputText [value]="form.prayer?.from" disabled class="w-full" />
                     </div>
                 </div>
             </div>
@@ -105,7 +123,8 @@
             <div class="col-12 col-md-12">
                 <div class="label">
                     <label>Descrição:</label>
-                    <textarea class="w-full field-textarea" pInputTextarea disabled style="resize: none; opacity: 0.9 !important;" [value]="form.message"></textarea>
+                    <textarea class="w-full field-textarea" pInputTextarea disabled
+                        style="resize: none; opacity: 0.9 !important;" [value]="form.message"></textarea>
                 </div>
             </div>
         </div>

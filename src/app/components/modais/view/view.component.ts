@@ -30,10 +30,6 @@ export class ModalViewComponent implements OnInit {
     }
 
     tratarValueType = (form: AvisoCommand) => {
-        let completeDesc = ''
-        if (form.guestType == 3)
-            completeDesc = form.person.birthday.type === 'LIFE' ? ' DE VIDA' : ' DE CASAMENTO';
-
-        return form.guestTypeDesc + completeDesc;
+        return form.guestTypeDesc
     }
 }

@@ -18,20 +18,29 @@ export class NavBarComponent implements OnInit {
     tokenExpirou: any;
     ngOnInit(): void {
         this.tokenExpirou = this.authService.tokenExpire();
-        this.items = [{
-            label: 'Avisos',
-            command: () => {
-                this.route.navigate(['/avisos'])
-            }
-        }, {
-            label: `${this.tokenExpirou ? 'Login' : 'Logout'}`, icon: 'pi pi-user', style: {'margin-left': 'auto'},
-            command: () => {
-                if (this.tokenExpirou) {
-                    this.route.navigate(['./login'])
-                } else {
-                    this.authService.logout();
+        this.items = [
+            {
+                label: 'Avisos',
+                command: () => {
+                    this.route.navigate(['/avisos'])
                 }
-            }
-        }]
+            },
+            {
+                label: 'Histórico',
+                command: () => {
+                    this.route.navigate(['/historico'])
+                }
+            },
+            {
+                label: `${this.tokenExpirou ? 'Login' : 'Logout'}`, icon: 'pi pi-user', style: {'margin-left': 'auto'},
+                command: () => {
+                    if (this.tokenExpirou) {
+                        this.route.navigate(['./login'])
+                    } else {
+                        this.authService.logout();
+                    }
+                }
+            },
+        ]
     }
 }

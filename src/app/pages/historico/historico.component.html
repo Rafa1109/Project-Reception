@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-12 col-md-12">
         <div class="">
-          <h2 class="d-md-block text-center text-md-left">Tabela de Avisos!</h2>
+          <h2 class="d-md-block text-center text-md-left">Histórico!</h2>
         </div>
       </div>
       <div class="col-12 d-md-block">
@@ -15,7 +15,7 @@
 
   <div class="col-12">
     <div class="row">
-      <div class="col-12" *ngIf="canAdd">
+      <!-- <div class="col-12" *ngIf="canAdd">
         <div class="row">
           <div class="mb-3 col-12 col-md-4 d-md-block">
             <p-button label="Adicionar Aviso" (onClick)="addAviso()"></p-button>
@@ -25,7 +25,7 @@
             <p-button label="Histórico" styleClass="p-button-outlined" (onClick)="addAviso()"></p-button>
           </div>
         </div>
-      </div>
+      </div> -->
 
       <div class="col-12">
         <div class="row">
@@ -40,6 +40,11 @@
                       Tipo<p-sortIcon field="guestTypeDesc"></p-sortIcon>
                     </p>
                   </th>
+                  <th pSortableColumn="createdDate">
+                    <p>
+                      Data<p-sortIcon field="createdDate"></p-sortIcon>
+                    </p>
+                  </th>
                   <th pSortableColumn="acoes">
                     <p>Ações</p>
                   </th>
@@ -48,6 +53,7 @@
               <ng-template pTemplate="body" let-aviso>
                 <tr [ngClass]="aviso.class">
                   <td>{{ aviso.guestTypeDesc }}</td>
+                  <td>{{ aviso.createdDate }}</td>
                   <td>
                     <div class="col-8 d-flex">
                       <div>
@@ -55,9 +61,6 @@
                           (onClick)="modalView(aviso)" label="Visualizar"></p-button>
                       </div>
                       <p-divider layout="vertical" *ngIf="canAdd"></p-divider>
-                      <div *ngIf="canAdd">
-                        <p-button styleClass="w-full" label="Editar" (onClick)="editAviso(aviso)"></p-button>
-                      </div>
                     </div>
                   </td>
                 </tr>
@@ -70,9 +73,9 @@
   </div>
 </base-content>
 
-<div *ngIf="telaState == 'formAvisos'">
+<!-- <div *ngIf="telaState == 'formAvisos'">
   <app-form-avisos [data]="formAviso" (onBack)="back($event)"></app-form-avisos>
-</div>
+</div> -->
 
 <app-modal-view #mview [title]="title" [form]="aviso" labelPrimaryButton="Marcar como lido e fechar"
   (onPrimaryClick)="closeModal(aviso)">

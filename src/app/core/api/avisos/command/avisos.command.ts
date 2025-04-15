@@ -36,13 +36,15 @@ export class AvisoCommand {
             case ENUMS.VISITANTE:
                 return "VISITANTE";
             case ENUMS.APRESENTACAO:
-                return "APRESENTAÇÃO";                
+                return "APRESENTAÇÃO";
             case ENUMS.AVISO_RECADO:
                 return "AVISO / RECADO";
             case ENUMS.ANIVERSARIO:
-                return "ANIVERSÁRIO";
+                return "ANIVERSÁRIO DE VIDA";
+            case ENUMS.ANIVERSARIO_CASAMENTO:
+                return "ANIVERSÁRIO DE CASAMENTO";
             case ENUMS.ORACAO:
-                return "ORAÇÃO";                
+                return "ORAÇÃO";
             default:
                 return;
         }
@@ -51,13 +53,15 @@ export class AvisoCommand {
     tratarClassAvisoCommand = (guestType: number) => {
         switch (guestType) {
             case ENUMS.VISITANTE:
-                return "visit";              
+                return "visit";
             case ENUMS.AVISO_RECADO:
                 return "message";
             case ENUMS.ANIVERSARIO:
                 return "birthday";
+            case ENUMS.ANIVERSARIO_CASAMENTO:
+                return "birthday_wedding";
             case ENUMS.ORACAO:
-                return "prayer";                
+                return "prayer";
             default:
                 return;
         }

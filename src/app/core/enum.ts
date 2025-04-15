@@ -3,5 +3,6 @@ export const ENUMS = {
     AVISO_RECADO: 2,
     ANIVERSARIO: 3,
     ORACAO: 4,
-    APRESENTACAO: 5
+    APRESENTACAO: 5,
+    ANIVERSARIO_CASAMENTO: 6
 }

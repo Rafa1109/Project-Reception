@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'http://recepcao-adosasco.com.br:8080/api'
+  api: (window as any).env?.API_URL || 'http://localhost:8080/api'
 };

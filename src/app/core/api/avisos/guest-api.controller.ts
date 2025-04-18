@@ -23,6 +23,10 @@ export class GuestApi {
         return this.http.get<any>(`${this._baseUrl}/find`);
     }
 
+    history(): Observable<any> {
+        return this.http.get<any>(`${this._baseUrl}/history`)
+    }
+    
     private edit(id: string, command: any): Observable<any> {
         return this.http.put<any>(`${this._baseUrl}/edit/${id}`, command);
     }
@@ -41,5 +45,9 @@ export class GuestApi {
 
     announced(id: string): Observable<any> {
         return this.http.put<any>(`${this._baseUrl}/announced/${id}`, null)
+    }
+
+    unread(id: string): Observable<any> {
+        return this.http.put<any>(`${this._baseUrl}/unread/${id}`, null);
     }
 }

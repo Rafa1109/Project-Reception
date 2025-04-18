@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-12 col-md-12">
         <div class="">
-          <h2 class="d-md-block text-center text-md-left">Histórico!</h2>
+          <h2 class="d-md-block text-center text-md-left">Histórico do dia!</h2>
         </div>
       </div>
       <div class="col-12 d-md-block">
@@ -15,17 +15,13 @@
 
   <div class="col-12">
     <div class="row">
-      <!-- <div class="col-12" *ngIf="canAdd">
+      <div class="col-12" *ngIf="canAdd">
         <div class="row">
           <div class="mb-3 col-12 col-md-4 d-md-block">
-            <p-button label="Adicionar Aviso" (onClick)="addAviso()"></p-button>
-          </div>
-          <div class="mb-3 col-12 col-md-4 d-md-block"></div>
-          <div class="mb-3 col-12 col-md-4 d-md-block">
-            <p-button label="Histórico" styleClass="p-button-outlined" (onClick)="addAviso()"></p-button>
+            <p-button label="Exportar" (onClick)="addAviso()"></p-button>
           </div>
         </div>
-      </div> -->
+      </div>
 
       <div class="col-12">
         <div class="row">
@@ -60,7 +56,6 @@
                         <p-button styleClass="w-full p-button-outlined dep-border-color-blue3"
                           (onClick)="modalView(aviso)" label="Visualizar"></p-button>
                       </div>
-                      <p-divider layout="vertical" *ngIf="canAdd"></p-divider>
                     </div>
                   </td>
                 </tr>
@@ -73,10 +68,6 @@
   </div>
 </base-content>
 
-<!-- <div *ngIf="telaState == 'formAvisos'">
-  <app-form-avisos [data]="formAviso" (onBack)="back($event)"></app-form-avisos>
-</div> -->
-
-<app-modal-view #mview [title]="title" [form]="aviso" labelPrimaryButton="Marcar como lido e fechar"
+<app-modal-view #mview [title]="title" [form]="aviso" labelPrimaryButton="Não Lido" labelSecondButton="Excluir" page="historico"
   (onPrimaryClick)="closeModal(aviso)">
 </app-modal-view>

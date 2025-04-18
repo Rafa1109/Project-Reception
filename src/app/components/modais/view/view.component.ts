@@ -12,6 +12,8 @@ export class ModalViewComponent implements OnInit {
     @Input() subtitle: string = '';
     @Input() form: AvisoCommand = new AvisoCommand();
     @Input() labelPrimaryButton: string = '';
+    @Input() labelSecondButton: string = '';
+    @Input() page: string = '';
 
     @Output() onPrimaryClick = new EventEmitter();
 
@@ -25,6 +27,11 @@ export class ModalViewComponent implements OnInit {
     closeModal = () => (this.displayModal = false);
 
     primaryClick = () => {
+        this.closeModal();
+        this.onPrimaryClick.emit();
+    }
+
+    secondClick = () => {
         this.closeModal();
         this.onPrimaryClick.emit();
     }

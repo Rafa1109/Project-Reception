@@ -1,0 +1,22 @@
+<p-dialog header="" [(visible)]="displayModal" [modal]="true" [style]="{ width: '800px' }" [draggable]="false"
+    [resizable]="false">
+
+    <div class="d-flex justify-content-center align-items-center d-flex text-center flex-column mb-3">
+        <b class="m-0 rth-color-secundary">{{ title }}</b>
+    </div>
+
+    <ng-template pTemplate="footer">
+        <div class="row d-flex justify-content-center align-items-center d-flex text-center flex-column">
+            <div class="row">
+                <div class="col-12 col-md-6 mb-3">
+                    <p-button styleClass="dep-bg-color-blue3 dep-border-color-blue3"
+                        label="Sim"></p-button>
+                </div>
+                <div class="col-12 col-md-6 mb-3">
+                    <p-button styleClass="dep-bg-color-red dep-border-color-red" 
+                        label="Não"></p-button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>

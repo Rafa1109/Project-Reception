@@ -56,7 +56,7 @@ export class HistoricoComponent extends BaseForm implements OnInit {
     avisos: AvisoCommand[] = [];
     totalItems: number = 0;
     getData = () => {
-        return this.guestApi.findAll().pipe(
+        return this.guestApi.history().pipe(
             tap(res => {
                 this.avisos = [];
                 res.guests.forEach((obj: any) => {

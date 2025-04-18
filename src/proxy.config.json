@@ -1,6 +1,6 @@
 {
     "/api": {
-        "target": "http://recepcao-adosasco.com.br:8080",
+        "target": "https://recepcao-adosasco.com.br",
         "secure": false
     }
 }

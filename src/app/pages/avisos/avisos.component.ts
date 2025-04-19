@@ -6,6 +6,7 @@ import { AvisoCommand } from "src/app/core/api/avisos/command/avisos.command";
 import { GuestApi } from "src/app/core/api/avisos/guest-api.controller";
 import { AuthService } from "src/app/core/services/authentications/auth.service";
 import { LoaderService } from "src/app/core/services/loader.service";
+import { WebSocketService } from "src/app/core/services/websocket.service";
 
 @Component({
     selector: 'app-avisos',
@@ -13,38 +14,40 @@ import { LoaderService } from "src/app/core/services/loader.service";
 })
 export class AvisosComponent extends BaseForm implements OnInit {
 
-    @ViewChild('mview') mview?: any;
+    @ViewChild('mview') mview?: any
 
     permissions = this.authService.currentUserTokenDetails;
 
     constructor(private route: Router,
         private guestApi: GuestApi,
         private authService: AuthService,
-        private loaderService: LoaderService) {
+        private loaderService: LoaderService,
+        private webSocketService: WebSocketService) {
         super();
     }
 
     canAdd: boolean = false;
     ngOnInit(): void {
+        this.webSocketService.connect();
         this.canAdd = this.permissions?.roles?.includes("ROLE_USER_WRITER");
         this.requestsOnInit();
     }
 
     requestsOnInit = () => {
         const requests = [
-          this.getData()
+            this.getData()
         ]
-    
+
         this.loaderService.show();
-    
+
         forkJoin(requests)
-          .subscribe({
-            next: () => { },
-            complete: () => {
-              this.loaderService.hide();
-            }
-          });
-      }
+            .subscribe({
+                next: () => { },
+                complete: () => {
+                    this.loaderService.hide();
+                }
+            });
+    }
 
     telaState: string = 'grid';
     formAviso: any;
@@ -56,15 +59,22 @@ export class AvisosComponent extends BaseForm implements OnInit {
     avisos: AvisoCommand[] = [];
     totalItems: number = 0;
     getData = () => {
-        return this.guestApi.findAll().pipe(
-            tap(res => {
-                this.avisos = [];
-                res.guests.forEach((obj: any) => {
-                    this.avisos.push(new AvisoCommand(obj));
-                })
-                this.totalItems = res.size;
-            })
-        )
+
+        this.webSocketService.GuestObservable$.subscribe(guest => {
+            this.totalItems = + 1;
+            return this.avisos.push(new AvisoCommand(guest))
+        });
+
+
+        // return this.guestApi.findAll().pipe(
+        //     tap(res => {
+        //         this.avisos = [];
+        //         res.guests.forEach((obj: any) => {
+        //             this.avisos.push(new AvisoCommand(obj));
+        //         })
+        //         this.totalItems = res.size;
+        //     })
+        // )
     }
 
     editAviso = (aviso: any) => {

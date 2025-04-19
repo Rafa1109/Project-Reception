@@ -22,13 +22,15 @@ export class AvisosComponent extends BaseForm implements OnInit {
         private guestApi: GuestApi,
         private authService: AuthService,
         private loaderService: LoaderService,
-        private webSocketService: WebSocketService) {
+        //private webSocketService: WebSocketService
+    ) {
         super();
     }
 
+
     canAdd: boolean = false;
     ngOnInit(): void {
-        this.webSocketService.connect();
+        //this.webSocketService.connect();
         this.canAdd = this.permissions?.roles?.includes("ROLE_USER_WRITER");
         this.requestsOnInit();
     }
@@ -60,21 +62,20 @@ export class AvisosComponent extends BaseForm implements OnInit {
     totalItems: number = 0;
     getData = () => {
 
-        this.webSocketService.GuestObservable$.subscribe(guest => {
-            this.totalItems = + 1;
-            return this.avisos.push(new AvisoCommand(guest))
-        });
+        // this.webSocketService.GuestObservable$.subscribe(guest => {
+        //     return this.avisos.push(new AvisoCommand(guest));
+        // });
 
 
-        // return this.guestApi.findAll().pipe(
-        //     tap(res => {
-        //         this.avisos = [];
-        //         res.guests.forEach((obj: any) => {
-        //             this.avisos.push(new AvisoCommand(obj));
-        //         })
-        //         this.totalItems = res.size;
-        //     })
-        // )
+        return this.guestApi.findAll().pipe(
+            tap(res => {
+                this.avisos = [];
+                res.guests.forEach((obj: any) => {
+                    this.avisos.push(new AvisoCommand(obj));
+                })
+                this.totalItems = res.size;
+            })
+        )
     }
 
     editAviso = (aviso: any) => {

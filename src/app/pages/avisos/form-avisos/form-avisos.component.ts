@@ -31,7 +31,7 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
 
     camposObrigatorios: { [key: string]: string[] } = {
         visitante: ["visitante", "frenquentaIgreja"],
-        aniversario: ["tipoAniversário", "idade", "aniversariante"],
+        aniversario: ["idade", "aniversariante"],
         apresentacao: ["crianca", "pais"]
     }
 
@@ -87,6 +87,15 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
 
         this.selectedTipo = event.value;
         this.avisoForm.guestType = this.selectedTipo;
+
+        if (this.avisoForm.guestType === 3) {
+            this.avisoForm.person.birthday.type = "LIFE";
+        }
+        if (this.avisoForm.guestType === 6) {
+            this.avisoForm.person.birthday.type = "WEDDING";
+        }
+
+
         this.updateValidators(this.camposObrigatorios[this.tipoAvisos.find((x: any) => x.id === event.value)?.name ?? ''] ?? [])
     }
 

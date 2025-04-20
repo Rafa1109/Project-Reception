@@ -5,6 +5,7 @@ import { LoginCommand } from "../../api/avisos/command/login.command";
 import { GuestApi } from "../../api/avisos/guest-api.controller";
 import { DecodedJwt } from "../crypt/decode-jwt.service";
 import { LocalStorageService } from "./local-storage.service";
+import { WebsocketService } from "src/app/core/services/websocket.service";
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -15,6 +16,7 @@ export class AuthService {
     constructor(
         private router: Router, private guestApi: GuestApi,
         private localStorage: LocalStorageService,
+        private websocketService: WebsocketService,
         private decodeJwt: DecodedJwt) {
         this.currentUserSubject = new BehaviorSubject<any>(
             this.getLocalStorageItem('currentUser')
@@ -24,12 +26,12 @@ export class AuthService {
 
     public get currentUserValue(): any {
         const user = this.getLocalStorageItem('currentUser');
-    
+
         if (user) {
-          this.currentUserSubject.next(user);
+            this.currentUserSubject.next(user);
         }
         return this.currentUserSubject.value;
-      }
+    }
 
     public get currentUserTokenDetails(): any {
         return this.getLocalStorageItem('user-token-details');
@@ -55,6 +57,9 @@ export class AuthService {
         this.localStorage.removeData('currentUser');
         this.localStorage.removeData('user-token-details');
 
+        this.websocketService.disconnect();
+        localStorage.clear();
+
         this.currentUserSubject.next(null);
         this.router.navigate(['/login']).then(() => {
         })
@@ -66,7 +71,7 @@ export class AuthService {
         return decoded;
     }
 
-    tokenExpire(): any {        
+    tokenExpire(): any {
         return this.decodeJwt.isTokenExpired(this.currentUserTokenDetails);
     }
 }

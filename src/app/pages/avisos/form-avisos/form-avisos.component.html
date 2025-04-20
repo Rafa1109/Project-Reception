@@ -81,18 +81,6 @@
                 <div class="row mt-4">
                     <div class="col-12 col-md-3">
                         <div class="field">
-                            <label>Tipo de Aniversário: <span class="required">*</span></label>
-                            <div class="d-flex align-items-center cp-h">
-                                <div class="d-flex align-items-center ml-5">
-                                    <input formControlName="tipoAniversário" type="radio" name="tipoAniversário"
-                                        value="LIFE" id="op1" [(ngModel)]="avisoForm.person.birthday.type" checked />
-                                    <label for="op1">Vida</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-3">
-                        <div class="field">
                             <label>Quantos anos?: <span class="required">*</span></label>
                             <input type="text" mask="00" pInputText class="w-full" formControlName="idade"
                                 [(ngModel)]="avisoForm.person.birthday.age">
@@ -111,19 +99,6 @@
             <!-- TIPO ANIVERSÁRIO CASAMENTO-->
             <div *ngIf="selectedTipo === 6">
                 <div class="row mt-4">
-                    <div class="col-12 col-md-3">
-                        <div class="field">
-                            <label>Tipo de Aniversário: <span class="required">*</span></label>
-                            <div class="d-flex align-items-center cp-h">
-                                <div class="d-flex align-items-center mr-5">
-                                    <input formControlName="tipoAniversário" type="radio" name="tipoAniversário"
-                                        value="WEDDING" checked id="op1" [(ngModel)]="avisoForm.person.birthday.type" />
-                                    <label for="op1">Casamento</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="col-12 col-md-3">
                         <div class="field">
                             <label>Quantos anos?: <span class="required">*</span></label>

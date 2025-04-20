@@ -1,6 +1,8 @@
 {
     "/api": {
         "target": "https://recepcao-adosasco.com.br",
-        "secure": false
+        "secure": false,
+        "changeOrigin": true,
+        "ws": true
     }
 }

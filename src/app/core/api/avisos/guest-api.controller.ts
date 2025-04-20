@@ -9,7 +9,7 @@ import { environment } from "src/environments/environment";
 export class GuestApi {
     _baseUrl: string = `${environment.api}/guest`;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     login(loginCommand: any): Observable<any> {
         return this.http.post<any>(`${this._baseUrl}/auth/login`, loginCommand);
@@ -38,7 +38,7 @@ export class GuestApi {
     save(command: any): Observable<any> {
         return command.id == null ? this.create(command) : this.edit(command.id, command);
     }
-    
+
     findById(id: string): Observable<any> {
         return this.http.get<any>(`${this._baseUrl}/find/${id}`);
     }

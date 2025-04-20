@@ -21,6 +21,9 @@ COPY env.template.js /usr/share/nginx/html/assets/env.template.js
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+ENV TZ=America/Sao_Paulo
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 # Expõe a porta 8000 (ajuste isso se usar outra)
 EXPOSE 8000
 

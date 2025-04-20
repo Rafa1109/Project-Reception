@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { CompatClient, Stomp } from '@stomp/stompjs';
+import { CompatClient, Stomp, } from '@stomp/stompjs';
 import { StompSubscription } from '@stomp/stompjs/src/stomp-subscription';
 import { environment } from "src/environments/environment";
 import { IMessage } from '@stomp/stompjs';
@@ -15,20 +15,31 @@ const wsUrl = apiBaseUrl.replace(/^https?/, wsProtocol) + '/guest/ws';
 })
 export class WebsocketService implements OnDestroy {
 
-    private connection: CompatClient | undefined = undefined;
-
+    private connection: CompatClient;
     private subscription: StompSubscription | undefined;
 
     constructor() {
         console.log("Starting a WebSocket connection");
-        this.connection = Stomp.client(wsUrl);
-        this.connection.connect({}, () => { });
+
+        this.connection = Stomp.over(() => new WebSocket(wsUrl));
+
+        this.connection.reconnectDelay = 5000;
+
+        this.connection.connect({}, () => {
+            console.log("WebSocket connected");
+        });
     }
 
     public listen(fun: ListenerCallBack): void {
-        if (this.connection) {
+        if (this.connection && this.connection.connected) {
+            this.subscription = this.connection.subscribe('/topic/guests', (message: IMessage) => {
+                fun(JSON.parse(message.body));
+            });
+        } else {
             this.connection.connect({}, () => {
-                this.subscription = this.connection!.subscribe('/topic/guests', (message: IMessage) => fun(JSON.parse(message.body)));
+                this.subscription = this.connection!.subscribe('/topic/guests', (message: IMessage) => {
+                    fun(JSON.parse(message.body));
+                });
             });
         }
     }
@@ -36,6 +47,11 @@ export class WebsocketService implements OnDestroy {
     ngOnDestroy(): void {
         if (this.subscription) {
             this.subscription.unsubscribe();
+        }
+        if (this.connection && this.connection.connected) {
+            this.connection.disconnect(() => {
+                console.log("WebSocket disconnected");
+            });
         }
     }
 

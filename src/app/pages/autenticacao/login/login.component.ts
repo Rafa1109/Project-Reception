@@ -6,6 +6,8 @@ import { BaseForm } from "src/app/components/base-form/base-form.component";
 import { LoginCommand } from "src/app/core/api/avisos/command/login.command";
 import { FormValidatorHelper } from "src/app/core/helpers/form-validation";
 import { AuthService } from "src/app/core/services/authentications/auth.service";
+import { WebsocketService } from "src/app/core/services/websocket.service";
+
 
 @Component({
     selector: 'app-login',
@@ -19,6 +21,8 @@ export class LoginComponent extends BaseForm implements OnInit {
         private fb: UntypedFormBuilder,
         private authService: AuthService,
         private messageService: MessageService,
+        private websocketService: WebsocketService,
+
         private route: Router
     ) {
         super();
@@ -32,6 +36,7 @@ export class LoginComponent extends BaseForm implements OnInit {
     }
 
     ngOnInit(): void {
+        this.websocketService.disconnect();
         this.form = this.fb.group({
             login: ['', [Validators.required]],
             senha: ['', [Validators.required]]
@@ -50,12 +55,12 @@ export class LoginComponent extends BaseForm implements OnInit {
 
     loginEnter() {
         document.addEventListener('keydown', function (e) {
-          if (e.key == 'Enter') {
-            let btn = document.getElementById('btnLogin');
-            btn?.click();
-          }
+            if (e.key == 'Enter') {
+                let btn = document.getElementById('btnLogin');
+                btn?.click();
+            }
         });
-      }
+    }
 
     loading: boolean[] = [false];
     login = () => {

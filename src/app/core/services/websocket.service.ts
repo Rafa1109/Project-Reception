@@ -2,6 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { CompatClient, Stomp } from '@stomp/stompjs';
 import { StompSubscription } from '@stomp/stompjs/src/stomp-subscription';
 import { environment } from "src/environments/environment";
+import { IMessage } from '@stomp/stompjs';
 
 export type ListenerCallBack = (message: Task) => void;
 
@@ -27,7 +28,7 @@ export class WebsocketService implements OnDestroy {
     public listen(fun: ListenerCallBack): void {
         if (this.connection) {
             this.connection.connect({}, () => {
-                this.subscription = this.connection!.subscribe('/topic/guests', message => fun(JSON.parse(message.body)));
+                this.subscription = this.connection!.subscribe('/topic/guests', (message: IMessage) => fun(JSON.parse(message.body)));
             });
         }
     }

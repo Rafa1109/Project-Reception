@@ -1,32 +1,36 @@
-import { Injectable } from '@angular/core';
-import * as SockJS from 'sockjs-client';
-import { Client, Message } from '@stomp/stompjs';
-import { Subject } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { CompatClient, Stomp } from '@stomp/stompjs';
+import { StompSubscription } from '@stomp/stompjs/src/stomp-subscription';
+
+export type ListenerCallBack = (message: Task) => void;
 
 @Injectable({
     providedIn: 'root'
 })
-export class WebSocketService {
+export class WebsocketService implements OnDestroy {
 
-    constructor(private stompClient: Client) { }
+    private connection: CompatClient | undefined = undefined;
 
-    private GuestSubject = new Subject<any>();
+    private subscription: StompSubscription | undefined;
 
-    GuestObservable$ = this.GuestSubject.asObservable();
-
-    connect() {
-        this.stompClient = new Client({
-            brokerURL: 'ws://localhost:8080/api/guest/ws',
-            webSocketFactory: () => new SockJS('http://localhost:8080/api/guest/ws'),
-            reconnectDelay: 5000,
-            onConnect: () => {
-                this.stompClient.subscribe('/topic/guests', (message: Message) => {
-                    const novoCliente = JSON.parse(message.body);
-                    this.GuestSubject.next(novoCliente);
-                });
-            }
-        });
-
-        this.stompClient.activate();
+    constructor() {
+        console.log("Starting a WebSocket connection");
+        this.connection = Stomp.client('ws://localhost:8080/api/guest/ws');
+        this.connection.connect({}, () => { });
     }
+
+    public listen(fun: ListenerCallBack): void {
+        if (this.connection) {
+            this.connection.connect({}, () => {
+                this.subscription = this.connection!.subscribe('/topic/guests', message => fun(JSON.parse(message.body)));
+            });
+        }
+    }
+
+    ngOnDestroy(): void {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
+    }
+
 }

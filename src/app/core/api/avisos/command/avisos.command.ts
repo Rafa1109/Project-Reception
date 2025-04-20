@@ -7,6 +7,7 @@ import { ENUMS } from "src/app/core/enum";
 export class AvisoCommand {
     constructor(data?: any) {
         this.guestType = data?.guestType;
+        this.sort = data?.sort;
         this.date = data?.date ?? new Date();
         this.person = new PersonCommand(data?.person) || null;
         this.prayer = new PrayerCommand(data?.prayer) || null;
@@ -14,12 +15,14 @@ export class AvisoCommand {
         this.message = data?.message
         this.id = data?.id ?? null;
         this.createdDate = data?.createdDate ? moment(data?.createdDate).format("DD/MM/YYYY") : undefined;
+        this.createdAt = data?.createdDate ? moment(data?.createdDate).format("DD/MM/YYYY HH:mm:ss") : undefined;
         this.announced = data?.announced;
         this.guestTypeDesc = this.tratarAvisoCommand(data?.guestType);
         this.class = this.tratarClassAvisoCommand(data?.guestType);
     }
 
     guestType: number;
+    sort: number;
     guestTypeDesc?: string;
     date: Date;
     person: PersonCommand;
@@ -28,6 +31,7 @@ export class AvisoCommand {
     message: string;
     id: string;
     createdDate?: string;
+    createdAt?: string;
     announced: boolean;
     class?: string;
 

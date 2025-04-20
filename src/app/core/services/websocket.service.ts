@@ -44,6 +44,18 @@ export class WebsocketService implements OnDestroy {
         }
     }
 
+    disconnect(): void {
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+            this.subscription = undefined;
+        }
+        if (this.connection && this.connection.connected) {
+            this.connection.disconnect(() => {
+                console.log('WebSocket desconectado');
+            });
+        }
+    }
+
     ngOnDestroy(): void {
         if (this.subscription) {
             this.subscription.unsubscribe();

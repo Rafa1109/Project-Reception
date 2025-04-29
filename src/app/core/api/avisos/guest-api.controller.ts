@@ -50,4 +50,12 @@ export class GuestApi {
     unread(id: string): Observable<any> {
         return this.http.put<any>(`${this._baseUrl}/unread/${id}`, null);
     }
+
+    delete(id: string): Observable<any> {
+        return this.http.delete<any>(`${this._baseUrl}/delete/${id}`);
+    }
+
+    export(): Observable<any> {
+        return this.http.get(`${this._baseUrl}/export`, { responseType: 'blob' });
+    }
 }

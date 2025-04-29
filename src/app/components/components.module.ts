@@ -8,6 +8,7 @@ import { LogoComponent } from "./logo/logo.component";
 import { ModalViewComponent } from "./modais/view/view.component";
 import { NavBarComponent } from "./navbar/navbar.component";
 import { ModalConfirmComponent } from "./modais/confirm/confirm.component";
+import { PagePermission } from "./pages-error/page-permission/page-permission";
 
 @NgModule({
     declarations: [
@@ -16,7 +17,8 @@ import { ModalConfirmComponent } from "./modais/confirm/confirm.component";
         ModalConfirmComponent,
         BaseContentComponent,
         LogoComponent,
-        LoadingComponent
+        LoadingComponent,
+        PagePermission
     ],
     imports: [
         PrimeNGModules,
@@ -27,8 +29,10 @@ import { ModalConfirmComponent } from "./modais/confirm/confirm.component";
         NavBarComponent,
         BaseContentComponent,
         ModalViewComponent,
+        ModalConfirmComponent,
         LogoComponent,
-        LoadingComponent
+        LoadingComponent,
+        PagePermission
     ]
 })
 export class ComponentsModule { }

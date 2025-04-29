@@ -134,12 +134,12 @@
     <ng-template pTemplate="footer">
         <div class="row d-flex justify-content-center align-items-center d-flex text-center flex-column">
             <div class="row">
-                <div class="col-12 col-md-6 mb-3">
+                <div class="col-12 mb-3" [ngClass]="!labelSecondButton ? 'col-md-12' : 'col-md-6'">
                     <p-button styleClass="dep-bg-color-blue3 dep-border-color-blue3" (onClick)="primaryClick()"
                         [label]="labelPrimaryButton"></p-button>
                 </div>
                 <div class="col-12 col-md-6 mb-3" *ngIf="page == 'historico'">
-                    <p-button styleClass="dep-bg-color-red dep-border-color-red" (onClick)="secondClick()"
+                    <p-button styleClass="dep-border-color-red dep-color-red p-button-outlined" (onClick)="secondClick()"
                         [label]="labelSecondButton"></p-button>
                 </div>
             </div>

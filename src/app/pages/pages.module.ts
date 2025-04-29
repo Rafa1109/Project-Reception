@@ -9,6 +9,7 @@ import { AutenticacaoComponent } from "./autenticacao/autenticacao.component";
 import { AvisosComponent } from "./avisos/avisos.component";
 import { FormAvisosComponent } from "./avisos/form-avisos/form-avisos.component";
 import { HistoricoComponent } from "./historico/historico.component";
+import { PermissionService } from "../core/services/authentications/permission.service";
 
 const routes: Routes = [
     {
@@ -25,6 +26,8 @@ const routes: Routes = [
     },
     {
         path: 'historico',
+        canActivate: [PermissionService],
+        data: { permission: 'ROLE_USER_WRITER' },
         component: HistoricoComponent
     }
 ]

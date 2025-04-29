@@ -16,6 +16,7 @@ export class ModalViewComponent implements OnInit {
     @Input() page: string = '';
 
     @Output() onPrimaryClick = new EventEmitter();
+    @Output() onSecondClick = new EventEmitter();
 
     ngOnInit(): void {
     }
@@ -32,8 +33,7 @@ export class ModalViewComponent implements OnInit {
     }
 
     secondClick = () => {
-        this.closeModal();
-        this.onPrimaryClick.emit();
+        this.onSecondClick.emit();
     }
 
     tratarValueType = (form: AvisoCommand) => {

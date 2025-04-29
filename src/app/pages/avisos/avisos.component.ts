@@ -8,6 +8,7 @@ import { AuthService } from "src/app/core/services/authentications/auth.service"
 import { LoaderService } from "src/app/core/services/loader.service";
 import { WebsocketService } from "src/app/core/services/websocket.service";
 import { MessageService } from "primeng/api";
+import { PermissionService } from "src/app/core/services/authentications/permission.service";
 
 
 @Component({
@@ -25,15 +26,15 @@ export class AvisosComponent extends BaseForm implements OnInit {
         private authService: AuthService,
         private loaderService: LoaderService,
         private messageService: MessageService,
-        private websocketService: WebsocketService
+        private websocketService: WebsocketService,
+        private permissionService: PermissionService
     ) {
         super();
     }
 
     canAdd: boolean = false;
     ngOnInit(): void {
-        this.canAdd = this.permissions?.roles?.includes("ROLE_USER_WRITER");
-
+        this.canAdd = this.permissionService.hasPermissionButton("ROLE_USER_WRITER");
         this.requestsOnInit(true);
 
         this.websocketService.listen(task => {

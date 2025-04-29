@@ -1,0 +1,19 @@
+<p-confirmDialog #cd>
+    <ng-template pTemplate="footer">
+      <div class="d-flex justify-content-center gap-3 mt-3 w-100">
+        <button pButton 
+                class="dep-bg-color-blue3 dep-border-color-blue3 w-100" 
+                label="Sim" 
+                (click)="cd.accept()">
+        </button>
+
+        <button pButton 
+                class="dep-border-color-red w-100 p-button-outlined dep-color-red" 
+                label="Não" 
+                (click)="cd.reject()">
+        </button>
+      </div>
+    </ng-template>
+  </p-confirmDialog>
+  
+  

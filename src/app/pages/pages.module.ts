@@ -8,6 +8,8 @@ import { PrimeNGModules } from "../core/modules/primeng.module";
 import { AutenticacaoComponent } from "./autenticacao/autenticacao.component";
 import { AvisosComponent } from "./avisos/avisos.component";
 import { FormAvisosComponent } from "./avisos/form-avisos/form-avisos.component";
+import { HistoricoComponent } from "./historico/historico.component";
+import { PermissionService } from "../core/services/authentications/permission.service";
 
 const routes: Routes = [
     {
@@ -21,18 +23,21 @@ const routes: Routes = [
     {
         path: 'avisos',
         component: AvisosComponent
-    }/*,
+    },
     {
-        path: 'form-aviso',
-        component: FormAvisosComponent
-    }*/
+        path: 'historico',
+        canActivate: [PermissionService],
+        data: { permission: 'ROLE_USER_WRITER' },
+        component: HistoricoComponent
+    }
 ]
 
 @NgModule({
     declarations: [
         AvisosComponent,
         AutenticacaoComponent,
-        FormAvisosComponent
+        FormAvisosComponent,
+        HistoricoComponent
     ],
     imports: [
         PrimeNGModules,

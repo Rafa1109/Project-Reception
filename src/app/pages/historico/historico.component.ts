@@ -10,6 +10,7 @@ import { GuestApi } from "src/app/core/api/avisos/guest-api.controller";
 import { AuthService } from "src/app/core/services/authentications/auth.service";
 import { LoaderService } from "src/app/core/services/loader.service";
 import { UtilService } from "src/app/core/services/util/util.service";
+import { WebsocketService } from "src/app/core/services/websocket.service";
 
 @Component({
     selector: 'app-historico',
@@ -27,12 +28,14 @@ export class HistoricoComponent extends BaseForm implements OnInit {
         private authService: AuthService,
         private loaderService: LoaderService,
         private messageService: MessageService,
+        private websocketService: WebsocketService,
         private utilService: UtilService) {
         super();
     }
 
     canAdd: boolean = false;
     ngOnInit(): void {
+        this.websocketService.disconnect();
         this.canAdd = this.permissions?.roles?.includes("ROLE_USER_WRITER");
         this.requestsOnInit();
     }

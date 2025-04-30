@@ -22,7 +22,6 @@ export class LoginComponent extends BaseForm implements OnInit {
         private authService: AuthService,
         private messageService: MessageService,
         private websocketService: WebsocketService,
-
         private route: Router
     ) {
         super();

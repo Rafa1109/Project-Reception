@@ -22,6 +22,8 @@ const routes: Routes = [
     },
     {
         path: 'avisos',
+        canActivate: [PermissionService],
+        data: { permission: 'ROLE_USER_READ' },
         component: AvisosComponent
     },
     {

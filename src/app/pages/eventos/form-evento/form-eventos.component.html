@@ -1,0 +1,48 @@
+<base-content>
+    <div class="col-12">
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="col-12">
+                    <div class="col-12 col-md-12">
+                        <h3 class="d-md-block text-center text-md-left">{{ title }}</h3>
+                    </div>
+                    <div class="col-12 d-md-block">
+                        <p-divider></p-divider>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12 col-md-6">
+                    <div class="field">
+                        <label>Data:</label>
+                        <p-calendar styleClass="w-full" formControlName="data" appendTo="body" dateFormat="dd/mm/yy"
+                            placeholder="DD/MM/AAAAA" inputId="data" [(ngModel)]="avisoForm.date"></p-calendar>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-12 col-md-12">
+                    <div class="field">
+                        <label>Descrição: </label>
+                        <textarea maxlength="100" class="field-textarea w-full" name="message" formControlName="message"
+                            [(ngModel)]="avisoForm.message">
+                    </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mt-4">
+                <div class="row">
+                    <div class="col-12 col-md-2">
+                        <p-button styleClass="w-full" icon="pi pi-check" (onClick)="onSave()" label="Salvar"
+                            [disabled]="form.invalid" [loading]="laoding[0]"></p-button>
+                    </div>
+                    <div class="col-12 col-md-2 mb-3">
+                        <p-button styleClass="w-full p-button-outlined" icon="pi pi-times" (onClick)="backGrid($event)"
+                            label="Cancelar"></p-button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</base-content>

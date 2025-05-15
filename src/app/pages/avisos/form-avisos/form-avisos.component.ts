@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { RequiredValidator, UntypedFormBuilder, Validators } from "@angular/forms";
-import { Router } from "@angular/router";
+import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { MessageService } from "primeng/api";
 import { BaseForm } from "src/app/components/base-form/base-form.component";
 import { AvisoCommand } from "src/app/core/api/avisos/command/avisos.command";
@@ -37,14 +36,13 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
 
     constructor(
         private fb: UntypedFormBuilder,
-        private route: Router,
         private guestApi: GuestApi,
         private messageService: MessageService
     ) {
         super();
     }
 
-    title: string = 'Cadastre um novo aviso!'
+    title: string = 'Cadastre um novo aviso'
     ngOnInit(): void {
         this.createForm();
         if (this.data) {

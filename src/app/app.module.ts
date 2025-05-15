@@ -10,7 +10,6 @@ import { JwtInterceptor } from './core/helpers/jw.interceptor';
 import { PrimeNGModules } from './core/modules/primeng.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MessageService } from 'primeng/api';
 import { LoaderInterceptor } from './core/helpers/loader.interceptor';
 import { ProgressBarModule } from 'primeng/progressbar';
 
@@ -30,9 +29,9 @@ const options: Partial<IConfig> = {};
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [HttpClient]
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
       }
     }),
     AppRoutingModule,

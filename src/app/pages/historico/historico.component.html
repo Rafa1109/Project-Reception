@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-12 col-md-12">
         <div class="">
-          <h2 class="d-md-block text-center text-md-left">Histórico do dia!</h2>
+          <h2 class="d-md-block text-center text-md-left">Histórico de Avisos</h2>
         </div>
       </div>
       <div class="col-12 d-md-block">
@@ -18,7 +18,7 @@
       <div class="col-12">
         <div class="row">
           <div class="mb-3 col-12 col-md-4 d-md-block">
-            <p-button label="Exportar" (onClick)="export()"></p-button>
+            <p-button label="Exportar" icon="pi pi-download" (onClick)="export()"></p-button>
           </div>
         </div>
       </div>
@@ -28,7 +28,8 @@
           <div class="col-12 pr-0 table-responsive">
             <p-table #table styleClass="p-datatable-striped" [rows]="7" [paginator]="true" [rowHover]="true"
               [value]="avisos" [totalRecords]="totalItems" [globalFilterFields]="['tipo']" dataKey="id"
-              [showCurrentPageReport]="true" currentPageReportTemplate="Exibindo {first} ao {last} de {totalRecords} avisos" responsiveLayout="scroll">
+              [showCurrentPageReport]="true"
+              currentPageReportTemplate="Exibindo {first} ao {last} de {totalRecords} avisos" responsiveLayout="scroll">
               <ng-template pTemplate="header">
                 <tr>
                   <th pSortableColumn="guestTypeDesc">
@@ -68,8 +69,8 @@
   </div>
 </base-content>
 
-<app-modal-view #mview [title]="title" [form]="aviso" labelPrimaryButton="Não Lido" labelSecondButton="Excluir" page="historico"
-  (onPrimaryClick)="closeModal(aviso)" (onSecondClick)="confirmDelete(aviso.id)">
+<app-modal-view #mview [title]="title" [form]="aviso" labelPrimaryButton="Não Lido" labelSecondButton="Excluir"
+  page="historico" (onPrimaryClick)="closeModal(aviso)" (onSecondClick)="confirmDelete(aviso.id)">
 </app-modal-view>
 
 <app-confirm-dialog></app-confirm-dialog>

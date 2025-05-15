@@ -168,13 +168,13 @@
             </div>
             <div class="col-12 mt-4">
                 <div class="row">
-                    <div class="col-12 col-md-2 mb-3">
-                        <p-button styleClass="w-full p-button-outlined" (onClick)="backGrid($event)"
-                            label="Voltar"></p-button>
-                    </div>
                     <div class="col-12 col-md-2">
-                        <p-button styleClass="w-full" (onClick)="onSave()" label="Enviar" [disabled]="form.invalid"
-                            [loading]="laoding[0]"></p-button>
+                        <p-button styleClass="w-full" (onClick)="onSave()" icon="pi pi-check" label="Enviar"
+                            [disabled]="form.invalid" [loading]="laoding[0]"></p-button>
+                    </div>
+                    <div class="col-12 col-md-2 mb-3">
+                        <p-button styleClass="w-full p-button-outlined" icon="pi pi-times" (onClick)="backGrid($event)"
+                            label="Cancelar"></p-button>
                     </div>
                 </div>
             </div>

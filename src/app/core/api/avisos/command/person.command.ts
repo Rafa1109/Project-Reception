@@ -15,10 +15,16 @@ export class PersonCommand {
 export class ChurchCommand {
     constructor(data?: any) {
         this.attend = data?.attend;
+        this.sector = data?.sector;
+        this.shepherd = data?.shepherd;
+        this.nameSector = data?.nameSector;
         this.name = data?.name;
     }
 
     attend: boolean;
+    sector: boolean;
+    shepherd: string;
+    nameSector: string;
     name: string;
 }
 

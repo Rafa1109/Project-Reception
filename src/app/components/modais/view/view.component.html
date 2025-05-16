@@ -106,11 +106,19 @@
             <div class="row mt-4">
                 <div class="col-12 col-md-6">
                     <div class="label">
-                        <label>Nome dos Pais:</label>
-                        <input pInputText [value]="form?.presentation?.parents" disabled class="w-full" />
+                        <label>Nome do Pai:</label>
+                        <input pInputText [value]="form?.presentation?.father" disabled class="w-full" />
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
+                    <div class="label">
+                        <label>Nome da Mãe:</label>
+                        <input pInputText [value]="form?.presentation?.mother" disabled class="w-full" />
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12 col-md-12">
                     <div class="label">
                         <label>Nome da criança:</label>
                         <input pInputText [value]="form.presentation?.children" disabled class="w-full" />
@@ -138,7 +146,7 @@
                     <p-button styleClass="dep-bg-color-blue3 dep-border-color-blue3" (onClick)="primaryClick()"
                         [label]="labelPrimaryButton"></p-button>
                 </div>
-                <div class="col-12 col-md-6 mb-3" *ngIf="page == 'historico'">
+                <div class="col-12 col-md-6 mb-3">
                     <p-button styleClass="dep-border-color-red dep-color-red p-button-outlined" (onClick)="secondClick()"
                         [label]="labelSecondButton"></p-button>
                 </div>

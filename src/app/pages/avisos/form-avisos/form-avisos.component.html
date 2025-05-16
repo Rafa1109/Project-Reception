@@ -74,6 +74,44 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row mt-4">
+                    <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Visitante setorial/outros? <span class="required">*</span></label>
+                            <div class="d-flex align-items-center cp-h">
+                                <div class="d-flex align-items-center mr-5">
+                                    <input formControlName="setorial" type="radio" name="setorial"
+                                        [value]="true" id="op1" [(ngModel)]="avisoForm.person.church.sector" />
+                                    <label for="op1">Sim</label>
+                                </div>
+
+                                <div class="d-flex align-items-center ml-5">
+                                    <input formControlName="setorial" type="radio" name="setorial"
+                                        [(ngModel)]="avisoForm.person.church.sector" [value]="false" id="op2" />
+                                    <label for="op2">Não</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6" *ngIf="avisoForm?.person?.church?.sector">
+                        <div class="field">
+                            <label>Nome do Pastor ou Representante: </label>
+                            <input type="text" pInputText class="w-full" formControlName="pastor"
+                                [(ngModel)]="avisoForm.person.church.shepherd">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12 col-md-6" *ngIf="avisoForm?.person?.church?.sector">
+                        <div class="field">
+                            <label>Setor: </label>
+                            <p-dropdown placeholder="Selecione o setor" optionLabel="value" optionValue="value"
+                                formControlName="nomeSetor" styleClass="w-full" [options]="setoresBelem"
+                                [(ngModel)]="avisoForm.person.church.nameSector"></p-dropdown>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- TIPO ANIVERSÁRIO VIDA -->
@@ -141,12 +179,21 @@
                 <div class="row mt-4">
                     <div class="col-12 col-md-6">
                         <div class="field">
-                            <label>Nome dos Pais: <span class="required">*</span></label>
-                            <input type="text" pInputText class="w-full" formControlName="pais"
-                                [(ngModel)]="avisoForm.presentation.parents">
+                            <label>Nome do Pai: <span class="required">*</span></label>
+                            <input type="text" pInputText class="w-full" formControlName="pai"
+                                [(ngModel)]="avisoForm.presentation.father">
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
+                        <div class="field">
+                            <label>Nome da Mãe: <span class="required">*</span></label>
+                            <input type="text" pInputText class="w-full" formControlName="mae"
+                                [(ngModel)]="avisoForm.presentation.mother">
+                        </div>
+                    </div>                    
+                </div>
+                <div class="row mt-4">
+                    <div class="col-12 col-md-12">
                         <div class="field">
                             <label>Nome da Criança: <span class="required">*</span></label>
                             <input type="text" pInputText class="w-full" formControlName="crianca"

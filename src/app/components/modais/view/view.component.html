@@ -26,7 +26,7 @@
         <!-- Tipo Visitante-->
         <div class="col-12" *ngIf="form.guestType === 1">
             <div class="row mt-4">
-                <div class="col-12 col-md-6" *ngIf="!form.person?.church?.sector">
+                <div class="col-12 col-md-6">
                     <div class="label">
                         <label>Visitante:</label>
                         <input pInputText [value]="form?.person?.name" disabled class="w-full" />

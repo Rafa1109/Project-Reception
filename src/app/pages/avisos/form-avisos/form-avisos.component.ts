@@ -65,6 +65,7 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
             igreja: [''],
             setorial: [''],
             pastor: [''],
+            representante: [''],
             nomeSetor: [''],
             convidadoPor: [''],
             avisoRecado: [''],

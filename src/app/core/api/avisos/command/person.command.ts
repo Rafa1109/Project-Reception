@@ -16,15 +16,17 @@ export class ChurchCommand {
     constructor(data?: any) {
         this.attend = data?.attend;
         this.sector = data?.sector;
-        this.shepherd = data?.shepherd;
-        this.nameSector = data?.nameSector;
+        this.reverend = data?.reverend;
+        this.delegate = data?.delegate;
+        this.sectorName = data?.sectorName;
         this.name = data?.name;
     }
 
     attend: boolean;
     sector: boolean;
-    shepherd: string;
-    nameSector: string;
+    reverend: string;
+    delegate: string;
+    sectorName: string;
     name: string;
 }
 

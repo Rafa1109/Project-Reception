@@ -26,9 +26,9 @@
         <!-- Tipo Visitante-->
         <div class="col-12" *ngIf="form.guestType === 1">
             <div class="row mt-4">
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-6" *ngIf="!form.person?.church?.sector">
                     <div class="label">
-                        <label>Nome do Visitante:</label>
+                        <label>Visitante:</label>
                         <input pInputText [value]="form?.person?.name" disabled class="w-full" />
                     </div>
                 </div>
@@ -44,6 +44,29 @@
                         <input pInputText value="Não" disabled class="w-full" />
                     </div>
                 </div>
+
+                <div class="col-12 col-md-6" *ngIf="form.person?.church?.sector">
+                    <div class="label">
+                        <label>Pastor: </label>
+                        <input pInputText [value]="form?.person?.church?.reverend" disabled class="w-full" />
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6" *ngIf="form.person?.church?.sector">
+                    <div class="label">
+                        <label>Representante: </label>
+                        <input pInputText [value]="form?.person?.church?.delegate" disabled class="w-full" />
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-6" *ngIf="form.person?.church?.sector">
+                    <div class="label">
+                        <label>Setor: </label>
+                        <input pInputText [value]="form?.person?.church?.sectorName" disabled class="w-full" />
+                    </div>
+                </div>
+
+
             </div>
         </div>
 
@@ -147,8 +170,8 @@
                         [label]="labelPrimaryButton"></p-button>
                 </div>
                 <div class="col-12 col-md-6 mb-3">
-                    <p-button styleClass="dep-border-color-red dep-color-red p-button-outlined" (onClick)="secondClick()"
-                        [label]="labelSecondButton"></p-button>
+                    <p-button styleClass="dep-border-color-red dep-color-red p-button-outlined"
+                        (onClick)="secondClick()" [label]="labelSecondButton"></p-button>
                 </div>
             </div>
         </div>

@@ -1,9 +1,11 @@
 export class PresentationCommand {
     constructor(data?: any) {
-        this.parents = data?.parents;
+        this.father = data?.father;
+        this.mother = data?.mother;
         this.children = data?.children;
     }
 
-    parents: string;
+    father: string;
+    mother: string
     children: string;
 }

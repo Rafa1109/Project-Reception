@@ -58,4 +58,8 @@ export class GuestApi {
     export(): Observable<any> {
         return this.http.get(`${this._baseUrl}/export`, { responseType: 'blob' });
     }
+
+    sectors(): Observable<any> {
+        return this.http.get(`${this._baseUrl}/sectors`);
+    }
 }

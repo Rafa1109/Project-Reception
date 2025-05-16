@@ -97,10 +97,11 @@ export class AvisosComponent extends BaseForm implements OnInit {
         this.telaState = 'formAvisos';
     }
 
-    readAviso = (aviso: AvisoCommand) => {
-        this.guestApi.announced(aviso.id).subscribe({
+    readAviso = (id: string) => {
+        this.guestApi.announced(id).subscribe({
             next: (result) => {
                 this.requestsOnInit();
+                this.closeModal()
             }
         })
 
@@ -114,9 +115,7 @@ export class AvisosComponent extends BaseForm implements OnInit {
         this.mview.openModal();
     }
 
-    closeModal = (obj: any) => {
-        this.aviso = new AvisoCommand(obj);
-        this.readAviso(this.aviso)
+    closeModal = () => {
         this.mview.closeModal();
     }
 

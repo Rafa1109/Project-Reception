@@ -47,6 +47,7 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
     title: string = 'Cadastre um novo aviso!'
     ngOnInit(): void {
         this.createForm();
+        this.getSectors();
         if (this.data) {
             this.editAviso();
         }
@@ -56,11 +57,16 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
         this.form = this.fb.group({
             tipo: ['', [Validators.required]],
             data: [''],
-            pais: [''],
+            pai: [''],
+            mae: [''],
             crianca: [''],
             visitante: [''],
             frenquentaIgreja: [''],
             igreja: [''],
+            setorial: [''],
+            pastor: [''],
+            representante: [''],
+            nomeSetor: [''],
             convidadoPor: [''],
             avisoRecado: [''],
             tipoAniversário: [''],
@@ -97,6 +103,15 @@ export class FormAvisosComponent extends BaseForm implements OnInit {
 
 
         this.updateValidators(this.camposObrigatorios[this.tipoAvisos.find((x: any) => x.id === event.value)?.name ?? ''] ?? [])
+    }
+
+    setoresBelem: [] = []
+    getSectors = () => {
+        this.guestApi.sectors().subscribe({
+            next: (result) => {
+                this.setoresBelem = result;
+            }
+        })
     }
 
     laoding: boolean[] = [false];

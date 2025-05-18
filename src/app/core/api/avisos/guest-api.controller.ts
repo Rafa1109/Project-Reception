@@ -26,7 +26,7 @@ export class GuestApi {
     history(): Observable<any> {
         return this.http.get<any>(`${this._baseUrl}/history`)
     }
-    
+
     private edit(id: string, command: any): Observable<any> {
         return this.http.put<any>(`${this._baseUrl}/edit/${id}`, command);
     }
@@ -60,6 +60,10 @@ export class GuestApi {
     }
 
     sectors(): Observable<any> {
-        return this.http.get(`${this._baseUrl}/sectors`);
+        return this.http.get(`${this._baseUrl}/utils/sectors`);
+    }
+
+    departments(): Observable<any> {
+        return this.http.get(`${this._baseUrl}/utils/departments`);
     }
 }

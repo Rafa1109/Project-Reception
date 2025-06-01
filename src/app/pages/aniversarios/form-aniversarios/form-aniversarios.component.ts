@@ -2,20 +2,16 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { MessageService } from "primeng/api";
 import { BaseForm } from "src/app/components/base-form/base-form.component";
-import { AvisoCommand } from "src/app/core/api/command/avisos.command";
-import { GuestApi } from "src/app/core/api/avisos/guest-api.controller";
-import { ENUMS } from "src/app/core/enum";
-import { EventoCommand } from "src/app/core/api/command/eventos.command";
-import { EventsApi } from "src/app/core/api/eventos/events-api.controller";
-import { UtilsApi } from "src/app/core/api/utils/utils-api.controller";
+import { BirthsApi } from "src/app/core/api/aniversarios/births-api.controller";
+import { BirthsdaysCommand } from "src/app/core/api/command/birthsdays.command";
 
 @Component({
-    selector: 'app-form-eventos',
-    templateUrl: './form-eventos.component.html'
+    selector: 'app-form-aniversarios',
+    templateUrl: './form-aniversarios.component.html'
 })
-export class FormEventosComponent extends BaseForm implements OnInit {
+export class FormAniversariosComponent extends BaseForm implements OnInit {
 
-    eventoForm: EventoCommand = new EventoCommand();
+    formBirthday: BirthsdaysCommand = new BirthsdaysCommand();
     formEdit: any;
 
     @Input() data: any;
@@ -23,49 +19,37 @@ export class FormEventosComponent extends BaseForm implements OnInit {
 
     constructor(
         private fb: UntypedFormBuilder,
-        private eventApi: EventsApi,
-        private utilsApi: UtilsApi,
+        private birthsApi: BirthsApi,
         private messageService: MessageService
     ) {
         super();
     }
 
-    title: string = 'Cadastre um novo Evento'
+    title: string = 'Cadastre um novo Aniversariante'
     ngOnInit(): void {
         this.createForm();
-        this.getDepartaments();
         if (this.data) {
-            this.editEvento();
+            this.editBirthday();
         }
     }
 
     createForm = () => {
         this.form = this.fb.group({
-            departamento: ['', [Validators.required]],
-            data: ['', [Validators.required]],
-            message: ['', [Validators.required]]
+            name: ['', [Validators.required]],
+            data: ['', [Validators.required]]
         })
     }
 
-    editEvento = () => {
-        this.title = 'Edição de Evento';
-        this.eventoForm = new EventoCommand(this.data);
+    editBirthday = () => {
+        this.title = 'Edição de Aniversário';
+        this.formBirthday = new BirthsdaysCommand(this.data);
 
-    }
-
-    departaments: any[] = [];
-    getDepartaments = () => {
-        this.utilsApi.departaments().subscribe({
-            next: (result) => {
-                this.departaments = result;
-            }
-        })
     }
 
     laoding: boolean[] = [false];
     onSave = () => {
         this.laoding[0] = true;
-        this.eventApi.save(this.eventoForm).subscribe({
+        this.birthsApi.save(this.formBirthday).subscribe({
             next: (result) => {
                 this.messageService.add({
                     severity: 'success',
@@ -77,7 +61,7 @@ export class FormEventosComponent extends BaseForm implements OnInit {
             error: () => {
                 this.messageService.add({
                     severity: 'error',
-                    summary: 'Erro ao salvar evento!',
+                    summary: 'Erro ao salvar aniversário!',
                     detail: 'Algo deu errado!',
                     life: 3000
                 })
@@ -90,7 +74,7 @@ export class FormEventosComponent extends BaseForm implements OnInit {
     }
 
     backGrid = (emitCall: any) => {
-        this.eventoForm = new EventoCommand();
+        this.formBirthday = new BirthsdaysCommand();
         this.onBack.emit({});
     }
 }

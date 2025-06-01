@@ -15,7 +15,7 @@
     <div class="col-12">
         <div class="row">
             <div class="col-12 mb-3 col-md-4">
-                <p-button label="Adicionar Evento" icon="pi pi-plus" (onClick)="abrirFormulario()"></p-button>
+                <p-button label="Adicionar Evento" icon="pi pi-plus" (onClick)="addEvento()"></p-button>
             </div>
         </div>
 
@@ -27,17 +27,26 @@
                     responsiveLayout="scroll" styleClass="p-datatable-striped">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th>Título</th>
+                            <th>Departamento</th>
+                            <th>Evento</th>
                             <th>Data</th>
                             <th>Ações</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-evento>
                         <tr>
-                            <td>{{ evento.titulo }}</td>
-                            <td>{{ evento.data | date: 'short' }}</td>
+                            <td>{{ evento.departamentName }}</td>
+                            <td>{{ evento.eventName }}</td>
+                            <td>{{ evento.eventDate | date: 'dd/MM/YYYY HH:mm' }}</td>
                             <td>
-                                <!-- Aqui você pode incluir botões de editar/remover se quiser -->
+                                 <div class="row">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <p-button styleClass="w-full" icon="pi pi-pencil" label="Editar" (onClick)="editEvento(evento)"></p-button>
+                                     </div>
+                                     <div class="col-12 col-md-6 mb-3">
+                                        <p-button styleClass="w-full dep-border-color-red dep-color-red p-button-outlined" icon="pi pi-trash" label="Remover" (onClick)="confirmDelete(evento)"></p-button>
+                                     </div>
+                                 </div>
                             </td>
                         </tr>
                     </ng-template>
@@ -47,7 +56,8 @@
     </div>
 </base-content>
 
-<!-- Tela do formulário de eventos -->
 <div *ngIf="telaState === 'formEventos'">
-    <app-form-eventos [data]="eventoFormData" (onBack)="voltarParaGrid()"></app-form-eventos>
+    <app-form-eventos [data]="formEvento" (onBack)="back()"></app-form-eventos>
 </div>
+
+<app-confirm-dialog></app-confirm-dialog>

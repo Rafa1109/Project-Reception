@@ -1,0 +1,126 @@
+{
+  "events": [
+    {
+      "id": "evt006",
+      "createdDate": "2025-05-25T14:40:00.000000",
+      "eventName": "EBD - Aula Especial",
+      "departamentName": "EBD",
+      "eventDate": "2025-06-30T09:00:00"
+    },
+    {
+      "id": "evt007",
+      "createdDate": "2025-05-25T15:20:00.000000",
+      "eventName": "Culto Ágape",
+      "departamentName": "GRUPO ÁGAPE",
+      "eventDate": "2025-08-05T19:30:00"
+    },
+    {
+      "id": "evt008",
+      "createdDate": "2025-05-25T16:10:00.000000",
+      "eventName": "Ensaio Louvor Domingo",
+      "departamentName": "GRUPO DE LOUVOR",
+      "eventDate": "2025-06-28T17:00:00"
+    },
+    {
+      "id": "evt009",
+      "createdDate": "2025-05-25T17:05:00.000000",
+      "eventName": "Culto Sara",
+      "departamentName": "GRUPO SARA",
+      "eventDate": "2025-07-18T20:00:00"
+    },
+    {
+      "id": "evt010",
+      "createdDate": "2025-05-25T18:30:00.000000",
+      "eventName": "Captação de Testemunhos",
+      "departamentName": "MÍDIA",
+      "eventDate": "2025-08-12T18:00:00"
+    }
+  ],
+  "departaments": [
+    {
+      "code": 0,
+      "department": "ABDA",
+      "desc": "ABDA (Coral e Orquestra)"
+    },
+    {
+      "code": 1,
+      "department": "BANDA",
+      "desc": "Banda"
+    },
+    {
+      "code": 2,
+      "department": "CORAL JOVEM",
+      "desc": "Coral Jovem"
+    },
+    {
+      "code": 3,
+      "department": "DIÁCONOS",
+      "desc": "Diáconos"
+    },
+    {
+      "code": 4,
+      "department": "DISCIPULADOS",
+      "desc": "Discipulados"
+    },
+    {
+      "code": 5,
+      "department": "EBD",
+      "desc": "EBD Escola biblica dominical"
+    },
+    {
+      "code": 6,
+      "department": "GRUPO ÁGAPE",
+      "desc": "Grupo Ágape"
+    },
+    {
+      "code": 7,
+      "department": "GRUPO DE LOUVOR",
+      "desc": "Grupo de Louvor"
+    },
+    {
+      "code": 8,
+      "department": "GRUPO SARA",
+      "desc": "Grupo Sara"
+    },
+    {
+      "code": 9,
+      "department": "MÍDIA",
+      "desc": "Mídia"
+    },
+    {
+      "code": 10,
+      "department": "MINISTÉRIO DA FAMILIA",
+      "desc": "Ministério da Família & Casais"
+    },
+    {
+      "code": 11,
+      "department": "RECEPÇÃO",
+      "desc": "Recepção & Acomodação"
+    },
+    {
+      "code": 12,
+      "department": "SEMEADO",
+      "desc": "Semeado"
+    },
+    {
+      "code": 13,
+      "department": "SOM",
+      "desc": "Som"
+    },
+    {
+      "code": 14,
+      "department": "TOP TEENS",
+      "desc": "Top Teens"
+    },
+    {
+      "code": 15,
+      "department": "ASILAR",
+      "desc": "Casa de idosos"
+    },
+    {
+      "code": 16,
+      "department": "HUMANITA",
+      "desc": "Casa de recuperação"
+    }
+  ]
+}

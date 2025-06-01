@@ -3,7 +3,7 @@ import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { MessageService } from "primeng/api";
 import { BaseForm } from "src/app/components/base-form/base-form.component";
-import { LoginCommand } from "src/app/core/api/avisos/command/login.command";
+import { LoginCommand } from "src/app/core/api/command/login.command";
 import { FormValidatorHelper } from "src/app/core/helpers/form-validation";
 import { AuthService } from "src/app/core/services/authentications/auth.service";
 import { WebsocketService } from "src/app/core/services/websocket.service";

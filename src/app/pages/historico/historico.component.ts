@@ -5,7 +5,7 @@ import { MessageService } from "primeng/api";
 import { forkJoin, tap } from "rxjs";
 import { BaseForm } from "src/app/components/base-form/base-form.component";
 import { ModalConfirmComponent } from "src/app/components/modais/confirm/confirm.component";
-import { AvisoCommand } from "src/app/core/api/avisos/command/avisos.command";
+import { AvisoCommand } from "src/app/core/api/command/avisos.command";
 import { GuestApi } from "src/app/core/api/avisos/guest-api.controller";
 import { AuthService } from "src/app/core/services/authentications/auth.service";
 import { LoaderService } from "src/app/core/services/loader.service";

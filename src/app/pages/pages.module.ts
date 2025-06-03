@@ -8,7 +8,9 @@ import { PrimeNGModules } from "../core/modules/primeng.module";
 import { AutenticacaoComponent } from "./autenticacao/autenticacao.component";
 import { AvisosComponent } from "./avisos/avisos.component";
 import { FormAvisosComponent } from "./avisos/form-avisos/form-avisos.component";
+import { FormEventosComponent } from "./eventos/form-evento/form-eventos.component";
 import { HistoricoComponent } from "./historico/historico.component";
+import { EventosComponent } from "./eventos/eventos.component";
 import { PermissionService } from "../core/services/authentications/permission.service";
 
 const routes: Routes = [
@@ -31,6 +33,12 @@ const routes: Routes = [
         canActivate: [PermissionService],
         data: { permission: 'ROLE_USER_WRITER' },
         component: HistoricoComponent
+    },
+    {
+        path: 'eventos',
+        canActivate: [PermissionService],
+        data: { permission: 'ROLE_USER_READ' },
+        component: EventosComponent
     }
 ]
 
@@ -39,7 +47,9 @@ const routes: Routes = [
         AvisosComponent,
         AutenticacaoComponent,
         FormAvisosComponent,
-        HistoricoComponent
+        FormEventosComponent,
+        HistoricoComponent,
+        EventosComponent
     ],
     imports: [
         PrimeNGModules,

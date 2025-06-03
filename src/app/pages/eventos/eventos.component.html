@@ -1,0 +1,63 @@
+<app-navbar></app-navbar>
+
+<base-content *ngIf="telaState === 'grid'">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12 col-md-12">
+                <h2 class="d-md-block text-center text-md-left">Eventos</h2>
+            </div>
+            <div class="col-12 d-md-block">
+                <p-divider></p-divider>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12 mb-3 col-md-4">
+                <p-button label="Adicionar Evento" icon="pi pi-plus" (onClick)="addEvento()"></p-button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 pr-0 table-responsive">
+                <p-table [value]="eventos" [rows]="7" [paginator]="true" [rowHover]="true"
+                    [showCurrentPageReport]="true"
+                    currentPageReportTemplate="Exibindo {first} ao {last} de {totalRecords} eventos"
+                    responsiveLayout="scroll" styleClass="p-datatable-striped">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Departamento</th>
+                            <th>Evento</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-evento>
+                        <tr>
+                            <td>{{ evento.departamentName }}</td>
+                            <td>{{ evento.eventName }}</td>
+                            <td>{{ evento.eventDate | date: 'dd/MM/YYYY HH:mm' }}</td>
+                            <td>
+                                 <div class="row">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <p-button styleClass="w-full" icon="pi pi-pencil" label="Editar" (onClick)="editEvento(evento)"></p-button>
+                                     </div>
+                                     <div class="col-12 col-md-6 mb-3">
+                                        <p-button styleClass="w-full dep-border-color-red dep-color-red p-button-outlined" icon="pi pi-trash" label="Remover" (onClick)="confirmDelete(evento)"></p-button>
+                                     </div>
+                                 </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</base-content>
+
+<div *ngIf="telaState === 'formEventos'">
+    <app-form-eventos [data]="formEvento" (onBack)="back()"></app-form-eventos>
+</div>
+
+<app-confirm-dialog></app-confirm-dialog>

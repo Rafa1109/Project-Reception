@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { forkJoin, lastValueFrom, tap } from "rxjs";
 import { BaseForm } from "src/app/components/base-form/base-form.component";
-import { AvisoCommand } from "src/app/core/api/avisos/command/avisos.command";
+import { AvisoCommand } from "src/app/core/api/command/avisos.command";
 import { GuestApi } from "src/app/core/api/avisos/guest-api.controller";
 import { AuthService } from "src/app/core/services/authentications/auth.service";
 import { LoaderService } from "src/app/core/services/loader.service";
@@ -38,7 +38,6 @@ export class AvisosComponent extends BaseForm implements OnInit {
         this.requestsOnInit(true);
 
         this.websocketService.listen(task => {
-            console.log('WebSocket recebido:', task);
             const novoAviso = new AvisoCommand(task);
             this.avisos = [...this.avisos, novoAviso]
                 .sort((a, b) => (a.sort ?? 0) - (b.sort ?? 0));

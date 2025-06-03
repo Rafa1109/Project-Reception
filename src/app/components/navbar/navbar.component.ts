@@ -51,5 +51,13 @@ export class NavBarComponent implements OnInit {
             });
         }
 
+        // Exemplo: só mostra "Histórico" se tiver role "ROLE_USER_WRITER"
+        if (this.permissionService.hasPermissionButton("ROLE_USER_READ")) {
+            this.items.push({
+                label: 'Eventos',
+                command: () => this.route.navigate(['/eventos'])
+            });
+        }
+
     }
 }

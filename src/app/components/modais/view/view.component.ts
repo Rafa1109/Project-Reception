@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { AvisoCommand } from "src/app/core/api/avisos/command/avisos.command";
+import { AvisoCommand } from "src/app/core/api/command/avisos.command";
 
 @Component({
     selector: 'app-modal-view',

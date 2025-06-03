@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { BehaviorSubject, map, Observable } from "rxjs";
-import { LoginCommand } from "../../api/avisos/command/login.command";
+import { LoginCommand } from "../../api/command/login.command";
 import { GuestApi } from "../../api/avisos/guest-api.controller";
 import { DecodedJwt } from "../crypt/decode-jwt.service";
 import { LocalStorageService } from "./local-storage.service";

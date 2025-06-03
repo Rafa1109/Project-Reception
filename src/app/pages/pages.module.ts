@@ -12,6 +12,8 @@ import { FormEventosComponent } from "./eventos/form-evento/form-eventos.compone
 import { HistoricoComponent } from "./historico/historico.component";
 import { EventosComponent } from "./eventos/eventos.component";
 import { PermissionService } from "../core/services/authentications/permission.service";
+import { AniversariosComponent } from "./aniversarios/aniversarios.component";
+import { FormAniversariosComponent } from "./aniversarios/form-aniversarios/form-aniversarios.component";
 
 const routes: Routes = [
     {
@@ -39,6 +41,12 @@ const routes: Routes = [
         canActivate: [PermissionService],
         data: { permission: 'ROLE_USER_READ' },
         component: EventosComponent
+    },
+    {
+        path: 'aniversarios',
+        canActivate: [PermissionService],
+        data: { permission: 'ROLE_USER_READ' },
+        component: AniversariosComponent
     }
 ]
 
@@ -49,7 +57,9 @@ const routes: Routes = [
         FormAvisosComponent,
         FormEventosComponent,
         HistoricoComponent,
-        EventosComponent
+        EventosComponent,
+        AniversariosComponent,
+        FormAniversariosComponent
     ],
     imports: [
         PrimeNGModules,

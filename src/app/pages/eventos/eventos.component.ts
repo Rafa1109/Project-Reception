@@ -74,7 +74,6 @@ export class EventosComponent extends BaseForm implements OnInit {
     getData = () => {
         return this.eventsApi.getAll().pipe(
             tap(res => {
-                console.log('res', res)
                 this.eventos = res.events.map((obj: any) => new EventoCommand(obj));
                 this.totalItems = res.size;
             })
@@ -82,7 +81,6 @@ export class EventosComponent extends BaseForm implements OnInit {
     }
 
     editEvento = (evento: any) => {
-        console.log(evento);
         this.formEvento = evento;
         this.telaState = 'formEventos';
     }

@@ -9,9 +9,9 @@ import { environment } from "src/environments/environment";
 export class UtilsApi {
     _baseUrl: string = `${environment.api}/guest/utils`;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
-    departaments(): Observable<any> {
-        return this.http.get<any>(`${this._baseUrl}/departaments`);
+    departments(): Observable<any> {
+        return this.http.get<any>(`${this._baseUrl}/departments`);
     }
 }

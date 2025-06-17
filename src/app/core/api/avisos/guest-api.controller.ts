@@ -62,8 +62,4 @@ export class GuestApi {
     sectors(): Observable<any> {
         return this.http.get(`${this._baseUrl}/utils/sectors`);
     }
-
-    departments(): Observable<any> {
-        return this.http.get(`${this._baseUrl}/utils/departments`);
-    }
 }

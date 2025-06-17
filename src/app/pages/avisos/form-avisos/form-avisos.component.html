@@ -72,6 +72,15 @@
                             <input type="text" pInputText class="w-full" formControlName="igreja"
                                 [(ngModel)]="avisoForm.person.church.name">
                         </div>
+                        <div class="col-12 col-md-6" *ngIf="avisoForm?.person?.church?.attend">
+                            <div class="field">
+                                <label for="nomeSetor">Setor:</label>
+                                <p-dropdown inputId="nomeSetor" placeholder="Selecione o setor" optionLabel="value"
+                                    optionValue="value" formControlName="nomeSetor" styleClass="w-full"
+                                    [options]="setoresBelem"
+                                    [(ngModel)]="avisoForm.person.church.sectorName"></p-dropdown>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -104,19 +113,6 @@
                             <label>Nome Representante: </label>
                             <input type="text" pInputText class="w-full" formControlName="representante"
                                 [(ngModel)]="avisoForm.person.church.delegate">
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-12 d-flex justify-content-end" *ngIf="avisoForm?.person?.church?.sector">
-                        <div class="col-md-6">
-                            <div class="field">
-                                <label for="nomeSetor">Setor:</label>
-                                <p-dropdown inputId="nomeSetor" placeholder="Selecione o setor" optionLabel="value"
-                                    optionValue="value" formControlName="nomeSetor" styleClass="w-full"
-                                    [options]="setoresBelem"
-                                    [(ngModel)]="avisoForm.person.church.sectorName"></p-dropdown>
-                            </div>
                         </div>
                     </div>
                 </div>

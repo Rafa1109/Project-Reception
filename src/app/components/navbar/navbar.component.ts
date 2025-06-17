@@ -51,6 +51,14 @@ export class NavBarComponent implements OnInit {
             });
         }
 
+        // Exemplo: só mostra "Eventos" se tiver role "ROLE_USER_WRITER"
+        if (this.permissionService.hasPermissionButton("ROLE_USER_READ")) {
+            this.items.push({
+                label: 'Eventos',
+                command: () => this.route.navigate(['/eventos'])
+            });
+        }
+
         // Exemplo: só mostra "Histórico" se tiver role "ROLE_USER_WRITER"
         if (this.permissionService.hasPermissionButton("ROLE_USER_WRITER")) {
             this.items.push({
@@ -59,12 +67,5 @@ export class NavBarComponent implements OnInit {
             });
         }
 
-        // Exemplo: só mostra "Eventos" se tiver role "ROLE_USER_WRITER"
-        if (this.permissionService.hasPermissionButton("ROLE_USER_READ")) {
-            this.items.push({
-                label: 'Eventos',
-                command: () => this.route.navigate(['/eventos'])
-            });
-        }
     }
 }

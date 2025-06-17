@@ -13,7 +13,7 @@
     </div>
 
     <div class="col-12">
-        <div class="row">
+        <div class="row" *ngIf="canAdd">
             <div class="col-12 mb-3 col-md-4">
                 <p-button label="Adicionar Evento" icon="pi pi-plus" (onClick)="addEvento()"></p-button>
             </div>
@@ -35,18 +35,18 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-evento>
                         <tr>
-                            <td>{{ evento.departamentName }}</td>
+                            <td>{{ evento.departmentName }}</td>
                             <td>{{ evento.eventName }}</td>
-                            <td>{{ evento.eventDate | date: 'dd/MM/YYYY HH:mm' }}</td>
+                            <td>{{ evento.eventDate | date: 'dd/MM/YYYY' }}</td>
                             <td>
-                                 <div class="row">
-                                    <div class="col-12 col-md-6 mb-3">
-                                        <p-button styleClass="w-full" icon="pi pi-pencil" label="Editar" (onClick)="editEvento(evento)"></p-button>
-                                     </div>
-                                     <div class="col-12 col-md-6 mb-3">
-                                        <p-button styleClass="w-full dep-border-color-red dep-color-red p-button-outlined" icon="pi pi-trash" label="Remover" (onClick)="confirmDelete(evento)"></p-button>
-                                     </div>
-                                 </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-6 mb-3" *ngIf="canAdd">
+                                        <p-button
+                                            styleClass="w-full dep-border-color-red dep-color-red p-button-outlined"
+                                            icon="pi pi-trash" label="Remover"
+                                            (onClick)="confirmDelete(evento)"></p-button>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     </ng-template>

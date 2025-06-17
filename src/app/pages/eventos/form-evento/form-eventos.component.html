@@ -15,16 +15,17 @@
                 <div class="col-12 col-md-6">
                     <div class="field">
                         <label>Departamento: <span style="color: red;">*</span></label>
-                        <p-dropdown placeholder="Selecione o departamento" optionLabel="department" optionValue="department"
-                            formControlName="departamento" styleClass="w-full" [options]="departaments"
-                            [(ngModel)]="eventoForm.departamentName"></p-dropdown>
+                        <p-dropdown placeholder="Selecione o departamento" optionLabel="department"
+                            optionValue="department" formControlName="departamento" styleClass="w-full"
+                            [options]="departments" [(ngModel)]="eventoForm.departmentName"></p-dropdown>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="field">
                         <label>Data: <span style="color: red;">*</span></label>
-                        <p-calendar styleClass="w-full" formControlName="data" appendTo="body" dateFormat="dd/mm/yy" [showTime]="true" 
-                            [touchUI]="true" placeholder="DD/MM/AAAAA HH:mm" inputId="data" [(ngModel)]="eventoForm.eventDate"></p-calendar>
+                        <p-calendar styleClass="w-full" formControlName="data" appendTo="body" dateFormat="dd/mm/yy"
+                            [touchUI]="true" placeholder="DD/MM/AAAAA" inputId="data"
+                            [(ngModel)]="eventoForm.eventDate"></p-calendar>
                     </div>
                 </div>
             </div>

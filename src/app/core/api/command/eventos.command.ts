@@ -5,15 +5,15 @@ export class EventoCommand {
         this.id = data?.id;
         this.sort = data?.sort;
         this.eventName = data?.eventName;
-        this.departament = data?.departament;
-        this.departamentName = data?.departamentName;
-        this.eventDate = data?.eventDate ? moment(data?.eventDate).toDate() : undefined;
+        this.department = data?.departament;
+        this.departmentName = data?.departmentName;
+        this.eventDate = moment(data?.eventDate).toDate();
     }
 
     id: string;
     sort: number;
     eventName: string;
-    departament: number;
-    departamentName: string;
+    department: number;
+    departmentName: string;
     eventDate?: Date;
 }

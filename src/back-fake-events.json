@@ -4,35 +4,35 @@
       "id": "evt006",
       "createdDate": "2025-05-25T14:40:00.000000",
       "eventName": "EBD - Aula Especial",
-      "departamentName": "EBD",
+      "departmentName": "EBD",
       "eventDate": "2025-06-30T09:00:00"
     },
     {
       "id": "evt007",
       "createdDate": "2025-05-25T15:20:00.000000",
       "eventName": "Culto Ágape",
-      "departamentName": "GRUPO ÁGAPE",
+      "departmentName": "GRUPO ÁGAPE",
       "eventDate": "2025-08-05T19:30:00"
     },
     {
       "id": "evt008",
       "createdDate": "2025-05-25T16:10:00.000000",
       "eventName": "Ensaio Louvor Domingo",
-      "departamentName": "GRUPO DE LOUVOR",
+      "departmentName": "GRUPO DE LOUVOR",
       "eventDate": "2025-06-28T17:00:00"
     },
     {
       "id": "evt009",
       "createdDate": "2025-05-25T17:05:00.000000",
       "eventName": "Culto Sara",
-      "departamentName": "GRUPO SARA",
+      "departmentName": "GRUPO SARA",
       "eventDate": "2025-07-18T20:00:00"
     },
     {
       "id": "evt010",
       "createdDate": "2025-05-25T18:30:00.000000",
       "eventName": "Captação de Testemunhos",
-      "departamentName": "MÍDIA",
+      "departmentName": "MÍDIA",
       "eventDate": "2025-08-12T18:00:00"
     }
   ],

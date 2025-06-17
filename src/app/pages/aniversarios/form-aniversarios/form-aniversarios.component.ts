@@ -58,11 +58,11 @@ export class FormAniversariosComponent extends BaseForm implements OnInit {
                     life: 3000
                 })
             },
-            error: () => {
+            error: (er) => {
                 this.messageService.add({
                     severity: 'error',
                     summary: 'Erro ao salvar aniversário!',
-                    detail: 'Algo deu errado!',
+                    detail: this.extractDetailedErrorMessage(er),
                     life: 3000
                 })
             }
@@ -77,4 +77,25 @@ export class FormAniversariosComponent extends BaseForm implements OnInit {
         this.formBirthday = new BirthsdaysCommand();
         this.onBack.emit({});
     }
+
+    extractDetailedErrorMessage(error: any): string {
+        if (!error || !error.error) {
+            return 'Erro desconhecido.';
+        }
+
+        const apiError = error.error;
+
+        if (apiError.errors && Array.isArray(apiError.errors)) {
+            return apiError.errors
+                .map((e: any) => `• ${e.message}`)
+                .join('\n');
+        }
+
+        if (apiError.message) {
+            return apiError.message;
+        }
+
+        return 'Erro inesperado ao processar a requisição.';
+    }
+
 }

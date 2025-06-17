@@ -2,9 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { MessageService } from "primeng/api";
 import { BaseForm } from "src/app/components/base-form/base-form.component";
-import { AvisoCommand } from "src/app/core/api/command/avisos.command";
-import { GuestApi } from "src/app/core/api/avisos/guest-api.controller";
-import { ENUMS } from "src/app/core/enum";
 import { EventoCommand } from "src/app/core/api/command/eventos.command";
 import { EventsApi } from "src/app/core/api/eventos/events-api.controller";
 import { UtilsApi } from "src/app/core/api/utils/utils-api.controller";
@@ -33,10 +30,7 @@ export class FormEventosComponent extends BaseForm implements OnInit {
     title: string = 'Cadastre um novo Evento'
     ngOnInit(): void {
         this.createForm();
-        this.getDepartaments();
-        if (this.data) {
-            this.editEvento();
-        }
+        this.getDepartments();
     }
 
     createForm = () => {
@@ -47,17 +41,11 @@ export class FormEventosComponent extends BaseForm implements OnInit {
         })
     }
 
-    editEvento = () => {
-        this.title = 'Edição de Evento';
-        this.eventoForm = new EventoCommand(this.data);
-
-    }
-
-    departaments: any[] = [];
-    getDepartaments = () => {
-        this.utilsApi.departaments().subscribe({
+    departments: any[] = [];
+    getDepartments = () => {
+        this.utilsApi.departments().subscribe({
             next: (result) => {
-                this.departaments = result;
+                this.departments = result;
             }
         })
     }
@@ -65,32 +53,53 @@ export class FormEventosComponent extends BaseForm implements OnInit {
     laoding: boolean[] = [false];
     onSave = () => {
         this.laoding[0] = true;
-        this.eventApi.save(this.eventoForm).subscribe({
-            next: (result) => {
-                this.messageService.add({
-                    severity: 'success',
-                    summary: 'Salvo com sucesso!',
-                    detail: 'Redirecionando Página!',
-                    life: 3000
-                })
-            },
-            error: () => {
-                this.messageService.add({
-                    severity: 'error',
-                    summary: 'Erro ao salvar evento!',
-                    detail: 'Algo deu errado!',
-                    life: 3000
-                })
-            }
-            , complete: () => {
-                this.laoding[0] = false;
-                this.onBack.emit();
-            }
-        })
+        this.eventApi.save(this.eventoForm)
+            .subscribe({
+                next: (result) => {
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Salvo com sucesso!',
+                        detail: 'Redirecionando Página!',
+                        life: 3000
+                    })
+                },
+                error: (er) => {
+                    this.messageService.add({
+                        severity: 'error',
+                        summary: 'Erro ao salvar evento!',
+                        detail: this.extractDetailedErrorMessage(er),
+                        life: 3000
+                    })
+                }
+                , complete: () => {
+                    this.laoding[0] = false;
+                    this.onBack.emit();
+                }
+            })
     }
 
     backGrid = (emitCall: any) => {
         this.eventoForm = new EventoCommand();
         this.onBack.emit({});
+    }
+
+    extractDetailedErrorMessage(error: any): string {
+        if (!error || !error.error) {
+            return 'Erro desconhecido.';
+        }
+
+        const apiError = error.error;
+
+        if (apiError.errors && Array.isArray(apiError.errors)) {
+            return apiError.errors
+                .map((e: any) => `• ${e.message}`)
+                .join('\n');
+        }
+
+        if (apiError.message) {
+            return apiError.message;
+        }
+
+        return 'Erro inesperado ao processar a requisição.';
     }
 }

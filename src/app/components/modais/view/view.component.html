@@ -38,6 +38,12 @@
                         <input pInputText [value]="form?.person?.church?.name" disabled class="w-full" />
                     </div>
                 </div>
+                <div class="col-12 col-md-6" *ngIf="form?.person?.invitedBy">
+                    <div class="label">
+                        <label>Veio a convite de:</label>
+                        <input pInputText [value]="form?.person?.invitedBy" disabled class="w-full" />
+                    </div>
+                </div>
                 <div class="col-12 col-md-6" *ngIf="!form.person?.church?.attend">
                     <div class="label">
                         <label>Frenquenta alguma igreja:</label>
@@ -59,10 +65,11 @@
                     </div>
                 </div>
 
-                <div class="col-12 col-md-6" *ngIf="form.person?.church?.sector">
+                <div class="col-12 col-md-6">
                     <div class="label">
                         <label>Setor: </label>
-                        <input pInputText [value]="form?.person?.church?.sectorName" disabled class="w-full" />
+                        <input pInputText [value]="form?.person?.church?.sectorName?.trim() || 'OUTROS'" disabled
+                            class="w-full" />
                     </div>
                 </div>
 

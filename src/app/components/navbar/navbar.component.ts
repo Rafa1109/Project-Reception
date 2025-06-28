@@ -43,7 +43,7 @@ export class NavBarComponent implements OnInit {
             });
         }
 
-        // Exemplo: só mostra "Aniversarios" se tiver role "ROLE_USER_WRITER"
+        // Exemplo: só mostra "Aniversarios" se tiver role "ROLE_USER_READ"
         if (this.permissionService.hasPermissionButton("ROLE_USER_READ")) {
             this.items.push({
                 label: 'Aniversariantes',
@@ -51,7 +51,7 @@ export class NavBarComponent implements OnInit {
             });
         }
 
-        // Exemplo: só mostra "Eventos" se tiver role "ROLE_USER_WRITER"
+        // Exemplo: só mostra "Eventos" se tiver role "ROLE_USER_READ"
         if (this.permissionService.hasPermissionButton("ROLE_USER_READ")) {
             this.items.push({
                 label: 'Eventos',

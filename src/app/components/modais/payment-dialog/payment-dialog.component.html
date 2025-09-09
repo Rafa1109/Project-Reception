@@ -1,0 +1,44 @@
+<p-dialog [(visible)]="visible" [modal]="true" [dismissableMask]="true" [closable]="false"
+    [style]="{ width: '520px', maxWidth: '95vw' }" [contentStyle]="{ overflow: 'visible' }"
+    header="{{ data?.title || 'Pagamento' }}">
+
+    <!-- Conteúdo -->
+    <ng-container *ngIf="data?.qrCodeUrl; else linkTpl">
+        <p class="mb-2">Escaneie o QR Code para pagar:</p>
+        <div class="w-full flex justify-content-center mb-3">
+            <img [src]="data!.qrCodeUrl" alt="QR Code" style="max-width: 320px; width: 100%; height: auto;" />
+        </div>
+
+        <!-- Copia e Cola (Pix) -->
+        <div class="mb-2">
+            <label class="mb-1 d-block">Copia e Cola (Pix)</label>
+            <div class="flex align-items-center gap-2">
+                <input pInputText class="flex-1" [value]="data?.copiaECola || ''" readonly />
+                <p-button icon="pi pi-copy" styleClass="p-button-outlined" (onClick)="copyPix()"
+                    [disabled]="!data?.copiaECola" pTooltip="Copiar código Pix" tooltipPosition="top">
+                </p-button>
+            </div>
+        </div>
+
+    </ng-container>
+
+    <ng-template #linkTpl>
+        <p class="mb-2">Abra o link de pagamento:</p>
+        <a *ngIf="data?.paymentLink" [href]="data!.paymentLink" target="_blank" rel="noopener">Pagar agora</a>
+    </ng-template>
+
+    <!-- Footer -->
+    <ng-template pTemplate="footer">
+        <div class="w-full flex justify-content-center">
+            <p-button label="Fechar" icon="pi pi-times" (onClick)="close()">
+            </p-button>
+        </div>
+        <div class="w-full flex justify-content-center mt-2">
+            <small class="text-800 text-center" *ngIf="data?.frase">
+                {{ data?.frase }}
+            </small>
+        </div>
+    </ng-template>
+
+
+</p-dialog>

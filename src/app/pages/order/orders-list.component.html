@@ -1,0 +1,99 @@
+<app-navbar></app-navbar>
+<base-content>
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12 col-md-12">
+                <div class="">
+                    <h2 class="d-md-block text-center text-md-left">Lista de Pedidos</h2>
+                </div>
+            </div>
+            <div class="col-12 d-md-block">
+                <p-divider></p-divider>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="mb-3 col-12 col-md-4 d-md-block">
+                        <p-button label="Recarregar" icon="pi pi-refresh" (onClick)="reload()"></p-button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 pr-0 table-responsive">
+                        <p-table #table styleClass="p-datatable-striped" [rows]="7" [paginator]="true" [rowHover]="true"
+                            [value]="orders" [totalRecords]="orders.length" [showCurrentPageReport]="true"
+                            currentPageReportTemplate="Exibindo {first} ao {last} de {totalRecords} pedidos"
+                            responsiveLayout="scroll">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>CPF</th>
+                                    <th>Nome</th>
+                                    <!-- <th>Email</th> -->
+                                    <!-- <th>Telefone</th> -->
+                                    <th>Produto</th>
+                                    <th>Valor</th>
+                                    <th>Qtd</th>
+                                    <th>Total</th>
+                                    <th>Pagamento</th>
+                                    <th>Status</th>
+                                    <th>Criado em</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-o>
+                                <tr [ngClass]="{
+        'row-confirmado': o.statusPagamento === 'CONFIRMADO',
+        'row-cancelado': o.statusPagamento === 'CANCELADO',
+        'row-pendente': o.statusPagamento === 'PENDENTE'
+      }">
+                                    <td>{{ o.cpf }}</td>
+                                    <td>{{ o.nomeCompleto }}</td>
+                                    <!-- <td>{{ o.email }}</td> -->
+                                    <!-- <td>{{ o.telefone }}</td> -->
+                                    <td>{{ o.produto }}</td>
+                                    <td>{{ (o.valorUnitario | number ) | currency:'BRL':'symbol-narrow':'1.2-2' }}</td>
+                                    <td>{{ o.qtd }}</td>
+                                    <td>{{ (o.valorTotal | number) | currency:'BRL':'symbol-narrow':'1.2-2' }}</td>
+                                    <td>{{ o.opcaoPagamento }}</td>
+                                    <td>{{ o.statusPagamento }}</td>
+                                    <td>{{ o.createdDate | date:'dd/MM/yyyy HH:mm' }}</td>
+                                    <td>
+                                        <div class="flex gap-2">
+                                            <button pButton type="button" label="Confirmar" icon="pi pi-check"
+                                                class="p-button-success p-button-sm" (click)="confirmar(o)"
+                                                [disabled]="o.statusPagamento === 'CONFIRMADO'">
+                                            </button>
+
+                                            <button pButton type="button" label="Cancelar" icon="pi pi-times"
+                                                class="p-button-warning p-button-sm" (click)="cancelar(o)"
+                                                [disabled]="o.statusPagamento === 'CANCELADO'">
+                                            </button>
+
+                                            <button pButton type="button" label="Deletar" icon="pi pi-trash"
+                                                class="p-button-danger p-button-sm" (click)="deletar(o)"
+                                                [disabled]="o.statusPagamento === 'CONFIRMADO'">
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="emptymessage">
+                                <tr>
+                                    <td colspan="8" class="text-center">Nenhum pedido encontrado.</td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</base-content>
+
+<app-confirm-dialog></app-confirm-dialog>

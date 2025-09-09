@@ -50,3 +50,18 @@
 .required {
     color: red;
 }
+
+.row-confirmado {
+    background-color: #d4edda !important;
+    /* verde claro */
+}
+
+.row-cancelado {
+    background-color: #fff3cd !important;
+    /* amarelo claro */
+}
+
+.row-pendente {
+    background-color: #f8d7da !important;
+    /* vermelho claro */
+}

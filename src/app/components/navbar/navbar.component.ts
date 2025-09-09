@@ -67,5 +67,13 @@ export class NavBarComponent implements OnInit {
             });
         }
 
+
+        if (this.permissionService.hasPermissionButton("CJ_ROLE_USER_READ")) {
+            this.items.push({
+                label: 'Lista de Pedidos',
+                command: () => this.route.navigate(['/pedidos'])
+            });
+        }
+
     }
 }

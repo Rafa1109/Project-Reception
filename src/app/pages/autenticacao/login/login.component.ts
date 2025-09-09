@@ -73,7 +73,11 @@ export class LoginComponent extends BaseForm implements OnInit {
                     life: 3000,
                 });
                 this.loading[0] = false
-                this.route.navigate([`avisos`]);
+                if (this.loginCommand.login == "CJ") {
+                    this.route.navigate([`pedidos`]);
+                } else {
+                    this.route.navigate([`avisos`]);
+                }
             }, error: (e) => {
                 this.messageService.add({
                     severity: 'error',

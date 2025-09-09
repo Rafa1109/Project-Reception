@@ -9,12 +9,14 @@ import { ModalViewComponent } from "./modais/view/view.component";
 import { NavBarComponent } from "./navbar/navbar.component";
 import { ModalConfirmComponent } from "./modais/confirm/confirm.component";
 import { PagePermission } from "./pages-error/page-permission/page-permission";
+import { PaymentDialogComponent } from "./modais/payment-dialog/payment-dialog.component";
 
 @NgModule({
     declarations: [
         NavBarComponent,
         ModalViewComponent,
         ModalConfirmComponent,
+        PaymentDialogComponent,
         BaseContentComponent,
         LogoComponent,
         LoadingComponent,
@@ -28,6 +30,7 @@ import { PagePermission } from "./pages-error/page-permission/page-permission";
     exports: [
         NavBarComponent,
         BaseContentComponent,
+        PaymentDialogComponent,
         ModalViewComponent,
         ModalConfirmComponent,
         LogoComponent,

@@ -20,8 +20,9 @@
                     <!-- CPF -->
                     <div class="col-12 col-md-6">
                         <label class="form-label d-block mb-1">CPF</label>
-                        <input pInputText formControlName="cpf" class="w-100" placeholder="Ex.: 99999999999" />
-                        <small class="p-error"
+                        <p-inputMask formControlName="cpf" mask="999.999.999-99" class="w-100"
+                            placeholder="___.___.___-__">
+                        </p-inputMask> <small class="p-error"
                             *ngIf="form.controls['cpf'].hasError('cpfInvalido') && form.controls['cpf'].touched">
                             CPF inválido!
                         </small>
@@ -31,6 +32,12 @@
                     <div class="col-12 col-md-6">
                         <label class="form-label d-block mb-1">Nome completo</label>
                         <input pInputText formControlName="nomeCompleto" class="w-100" placeholder="Ex.: Maria Silva" />
+                    </div>
+
+                    <!-- Apelido -->
+                    <div class="col-12 col-md-6">
+                        <label class="form-label d-block mb-1">Apelido</label>
+                        <input pInputText formControlName="apelido" class="w-100" placeholder="Ex.: Juninho" />
                     </div>
 
                     <!-- Email -->
@@ -43,7 +50,17 @@
                     <!-- Telefone -->
                     <div class="col-12 col-md-6">
                         <label class="form-label d-block mb-1">Telefone</label>
-                        <input pInputText formControlName="telefone" class="w-100" placeholder="(11) 99999-9999" />
+                        <input pInputText formControlName="telefone" class="w-100" placeholder="11999999999"
+                            inputmode="tel" />
+
+                        <small class="text-danger"
+                            *ngIf="form.get('telefone')?.touched && form.get('telefone')?.errors">
+                            <!-- obrigatório -->
+                            <span *ngIf="form.get('telefone')?.errors?.['required']">Informe o telefone.</span>
+                            <!-- 11 dígitos -->
+                            <span *ngIf="form.get('telefone')?.errors?.['phone11']">Telefone deve ter 11 dígitos (DDD +
+                                número).</span>
+                        </small>
                     </div>
 
                     <!-- Produto (fixo) -->
@@ -62,7 +79,7 @@
                     <!-- Quantidade (+/-) -->
                     <div class="col-12 col-md-3">
                         <label class="form-label d-block mb-1">Quantidade</label>
-                        <p-inputNumber formControlName="qtd" [showButtons]="true" [min]="1" [step]="1"
+                        <p-inputNumber formControlName="qtd" [showButtons]="true" [min]="1" [max]="10" [step]="1"
                             inputId="qtd"></p-inputNumber>
                     </div>
 

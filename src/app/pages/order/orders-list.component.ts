@@ -3,6 +3,7 @@ import { OrderDTO } from 'src/app/core/api/command/order';
 import { OrderService } from 'src/app/core/api/order/order.service';
 import { MessageService } from "primeng/api";
 import { finalize } from 'rxjs/operators';
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -11,10 +12,13 @@ import { finalize } from 'rxjs/operators';
 })
 export class OrdersListComponent {
   orders: OrderDTO[] = [];
+  valorTotalConfirmado = 0;
+  valorTotalPendente = 0;
   loading = false;
 
   constructor(private api: OrderService,
     private messageService: MessageService,
+    private route: Router
   ) { }
 
   ngOnInit() { this.reload(); }
@@ -26,11 +30,17 @@ export class OrdersListComponent {
       .subscribe({
         next: (list) => {
           this.orders = list.orders;
+          this.valorTotalConfirmado = list.valorTotalConfirmado;
+          this.valorTotalPendente = list.valorTotalPendente;
         },
         error: () => {
           this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao carregar pedidos', life: 3000 });
         }
       });
+  }
+
+  newOrder() {
+    this.route.navigate([`cj-novo-pedido`]);
   }
 
   confirmar(o: OrderDTO) {

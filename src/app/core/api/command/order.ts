@@ -45,8 +45,10 @@ export interface OrderCreateResponse {
  */
 export interface OrderDTO extends OrderAmount {
     id: string;
+    numeroPedido: string;
     cpf: string;
     nomeCompleto: string;
+    apelido: string;
     email: string;
     telefone: string;
     produto: typeof PRODUTO_FIXO;   // "Hambúrguer CJ"
@@ -58,5 +60,7 @@ export interface OrderDTO extends OrderAmount {
 
 export interface OrdersResponse {
     orders: OrderDTO[];
+    valorTotalConfirmado: number;
+    valorTotalPendente: number;
     size: number;
 }

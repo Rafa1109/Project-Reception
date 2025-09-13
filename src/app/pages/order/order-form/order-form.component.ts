@@ -5,6 +5,7 @@ import { OrderService } from 'src/app/core/api/order/order.service';
 import { OrderCreateResponse, PRODUTO_FIXO, VALOR_UNITARIO_FIXO } from 'src/app/core/api/command/order';
 import { PaymentDialogComponent } from 'src/app/components/modais/payment-dialog/payment-dialog.component';
 import { cpfValidator } from 'src/app/core/helpers/cpf-validator';
+import { phone11Validator } from 'src/app/core/helpers/phone.validators';
 import { MessageService } from "primeng/api";
 
 
@@ -28,10 +29,11 @@ export class OrderFormComponent {
     cpf: ['', [Validators.required, cpfValidator]],
     nomeCompleto: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
-    telefone: ['', [Validators.required]],
+    telefone: ['', [Validators.required, phone11Validator]],
     produto: [{ value: PRODUTO_FIXO, disabled: true }], // fixo
     qtd: [1, [Validators.required, Validators.min(1)]],
     opcaoPagamento: ['PIX' as OpcaoPagamento, [Validators.required]],
+    apelido: ['', '']
   });
 
   get total(): number {
@@ -50,8 +52,9 @@ export class OrderFormComponent {
     const raw = this.form.getRawValue();
 
     const payload = {
-      cpf: raw.cpf,
+      cpf: raw.cpf.replace(/\D/g, ''),
       nomeCompleto: raw.nomeCompleto,
+      apelido: raw.apelido,
       email: raw.email,
       telefone: raw.telefone,
       produto: raw.produto,                 // "Hambúrguer CJ"
@@ -78,6 +81,7 @@ export class OrderFormComponent {
           this.form.reset({
             cpf: '',
             nomeCompleto: '',
+            apelido: '',
             email: '',
             telefone: '',
             produto: 'Hambúrguer CJ',

@@ -20,6 +20,24 @@
                     <div class="mb-3 col-12 col-md-4 d-md-block">
                         <p-button label="Recarregar" icon="pi pi-refresh" (onClick)="reload()"></p-button>
                     </div>
+                    <div class="mb-3 col-12 col-md-4 d-md-block">
+                        <p-button label="Pedido" icon="pi pi-check" (onClick)="newOrder()"></p-button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- A receber -->
+                    <div class="mb-3 col-12 col-md-4 d-md-block">
+                        <label class="form-label d-block mb-1">A receber (-)</label>
+                        <input pInputText class="w-auto text-red"
+                            [value]="valorTotalPendente | currency:'BRL':'symbol':'1.2-2'" readonly />
+                    </div>
+                    <!-- Total pago -->
+                    <div class="mb-3 col-12 col-md-4 d-md-block">
+                        <label class="form-label d-block mb-1">Total Pago (+)</label>
+                        <input pInputText class="w-auto text-green"
+                            [value]="valorTotalConfirmado | currency:'BRL':'symbol':'1.2-2'" readonly />
+                    </div>
                 </div>
             </div>
 
@@ -32,8 +50,10 @@
                             responsiveLayout="scroll">
                             <ng-template pTemplate="header">
                                 <tr>
+                                    <th>Pedido</th>
                                     <th>CPF</th>
                                     <th>Nome</th>
+                                    <th>Apelido</th>
                                     <!-- <th>Email</th> -->
                                     <!-- <th>Telefone</th> -->
                                     <th>Produto</th>
@@ -48,16 +68,19 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-o>
                                 <tr [ngClass]="{
-        'row-confirmado': o.statusPagamento === 'CONFIRMADO',
-        'row-cancelado': o.statusPagamento === 'CANCELADO',
-        'row-pendente': o.statusPagamento === 'PENDENTE'
-      }">
+                  'row-confirmado': o.statusPagamento === 'CONFIRMADO',
+                  'row-cancelado': o.statusPagamento === 'CANCELADO',
+                  'row-pendente': o.statusPagamento === 'PENDENTE'
+                }">
+                                    <td>{{ o.numeroPedido }}</td>
                                     <td>{{ o.cpf }}</td>
                                     <td>{{ o.nomeCompleto }}</td>
+                                    <td>{{ o.apelido }}</td>
                                     <!-- <td>{{ o.email }}</td> -->
                                     <!-- <td>{{ o.telefone }}</td> -->
                                     <td>{{ o.produto }}</td>
-                                    <td>{{ (o.valorUnitario | number ) | currency:'BRL':'symbol-narrow':'1.2-2' }}</td>
+                                    <td>{{ (o.valorUnitario | number) | currency:'BRL':'symbol-narrow':'1.2-2' }}
+                                    </td>
                                     <td>{{ o.qtd }}</td>
                                     <td>{{ (o.valorTotal | number) | currency:'BRL':'symbol-narrow':'1.2-2' }}</td>
                                     <td>{{ o.opcaoPagamento }}</td>

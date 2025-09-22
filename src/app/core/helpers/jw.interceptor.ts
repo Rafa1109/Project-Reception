@@ -11,7 +11,8 @@ export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentUser = this.authService.currentUserValue;
     if (currentUser && currentUser?.token) {
-      if (request.url.endsWith("login")) {
+      if (request.method.match("POST") && (request.url.endsWith("login")
+        || request.url.endsWith("orders"))) {
         return next.handle(request);
       }
       if (request.url.indexOf(environment.api.substr(0, environment.api.length - 3)) > -1) {

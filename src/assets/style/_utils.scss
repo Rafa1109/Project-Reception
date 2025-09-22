@@ -66,6 +66,11 @@
     /* vermelho claro */
 }
 
+.row-entregue {
+    background-color: #8dfa6b !important;
+    /* verde claro */
+}
+
 .text-red {
     color: #dc2626;
     /* vermelho */
@@ -77,4 +82,24 @@
     color: #16a34a;
     /* verde */
     font-weight: 600;
+}
+
+.standard-button {
+    /* Define a largura para todos os botões */
+    width: 150px;
+    /* Adiciona margem inferior para espaçamento */
+    margin-bottom: 15px;
+}
+
+/* Para ajustar a largura em telas menores, se necessário */
+@media (max-width: 768px) {
+    .standard-button {
+        width: 100%;
+        /* Ocupa a largura total em dispositivos móveis */
+    }
+}
+
+.my-custom-button {
+    margin-left: 10px;
+    /* Ou o valor que preferir, como 15px */
 }

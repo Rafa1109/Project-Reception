@@ -12,11 +12,19 @@
         <!-- Copia e Cola (Pix) -->
         <div class="mb-2">
             <label class="mb-1 d-block">Copia e Cola (Pix)</label>
-            <div class="flex align-items-center gap-2">
-                <input pInputText class="flex-1" [value]="data?.copiaECola || ''" readonly />
-                <p-button icon="pi pi-copy" styleClass="p-button-outlined" (onClick)="copyPix()"
-                    [disabled]="!data?.copiaECola" pTooltip="Copiar código Pix" tooltipPosition="top">
-                </p-button>
+
+            <!-- Código Pix (com scroll se for muito grande) -->
+            <div class="overflow-auto mb-2">
+                <small class="text-900 d-inline-block" style="white-space: nowrap;" *ngIf="data?.copiaECola">
+                    {{ data?.copiaECola }}
+                </small>
+            </div>
+
+            <!-- Botão embaixo -->
+            <div class="text-center">
+                <button pButton label="Copiar código" icon="pi pi-copy" class="p-button-sm p-button-outlined"
+                    (click)="copiarCodigo(data?.copiaECola)">
+                </button>
             </div>
         </div>
 

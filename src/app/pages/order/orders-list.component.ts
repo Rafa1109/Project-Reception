@@ -4,7 +4,9 @@ import { OrderService } from 'src/app/core/api/order/order.service';
 import { MessageService } from "primeng/api";
 import { finalize } from 'rxjs/operators';
 import { Router } from "@angular/router";
-
+import { FormBuilder, Validators } from '@angular/forms';
+import { UtilService } from 'src/app/core/services/util/util.service';
+import moment from 'moment';
 
 @Component({
   selector: 'app-orders-list',
@@ -18,12 +20,21 @@ export class OrdersListComponent {
 
   constructor(private api: OrderService,
     private messageService: MessageService,
+    private utilService: UtilService,
+    private fb: FormBuilder,
     private route: Router
   ) { }
 
+  form = this.fb.group({
+    numeroPedido: ['', [Validators.minLength(5)]], // ajuste a regra conforme seu padrão
+  });
+
+
   ngOnInit() { this.reload(); }
 
+  first = 0;
   reload() {
+    this.first = 0;
     this.loading = true;
     this.api.listarPedidos()
       .pipe(finalize(() => this.loading = false))
@@ -39,12 +50,40 @@ export class OrdersListComponent {
       });
   }
 
+
+  search(): void {
+    this.first = 0;
+    const numero = this.form.value.numeroPedido?.toString().trim();
+    if (!numero) {
+      this.orders = [];
+      return;
+    }
+    this.loading = true;
+    this.api.getPedido(numero)
+      .pipe(finalize(() => (this.loading = false)))
+      .subscribe({
+        next: (list) => {
+          this.orders = list.orders;
+          this.valorTotalConfirmado = list.valorTotalConfirmado;
+          this.valorTotalPendente = list.valorTotalPendente;
+        },
+        error: () => {
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao carregar pedidos', life: 3000 });
+        }
+      });
+  }
+
+  clear(): void {
+    this.form.reset({ numeroPedido: '' });
+    this.reload();
+  }
+
   newOrder() {
     this.route.navigate([`cj-novo-pedido`]);
   }
 
   confirmar(o: OrderDTO) {
-    if (!confirm(`Confirmar pagamento do pedido ${o.id}?`)) return;
+    if (!confirm(`Confirmar pagamento do pedido ${o.numeroPedido}?`)) return;
     this.api.confirmarPagamento(o.id).subscribe({
       next: () => {
         this.reload()
@@ -61,8 +100,63 @@ export class OrdersListComponent {
     });
   }
 
+  export() {
+    this.api.export().subscribe({
+      next: (result) => {
+        const fileName = `CJ_${moment().format('DD_MM_yyyy_HH:mm')}.csv`;
+        this.utilService.downloadArquivo(result, fileName);
+      },
+      error: (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Erro ao realizar Download',
+          life: 3000,
+        });
+      }
+    })
+  }
+
+  notify() {
+    if (!confirm(`Notificar pagamentos pendentes ?`)) return;
+    this.api.notifyPedido()
+      .pipe(finalize(() => { }))
+      .subscribe({
+        next: (res) => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Notificação Enviada!',
+            detail: res.message,
+            life: 3000
+          })
+        },
+        error: () => {
+          this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao notificar pedidos pendentes.', life: 3000 });
+        }
+      });
+  }
+
+
+  entregar(o: OrderDTO) {
+    if (!confirm(`Confirmar entrega do pedido ${o.numeroPedido}?`)) return;
+    this.api.entregarPedido(o.id).subscribe({
+      next: () => {
+        this.reload()
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Entregue!',
+          detail: 'Pedido Cancelado',
+          life: 3000
+        })
+      },
+      error: () => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao entregar pedido', life: 3000 });
+      }
+    });
+  }
+
+
   cancelar(o: OrderDTO) {
-    if (!confirm(`Confirmar cancelamento do pedido ${o.id}?`)) return;
+    if (!confirm(`Confirmar cancelamento do pedido ${o.numeroPedido}?`)) return;
     this.api.cancelarPagamento(o.id).subscribe({
       next: () => {
         this.reload()
@@ -80,7 +174,7 @@ export class OrdersListComponent {
   }
 
   deletar(o: OrderDTO) {
-    if (!confirm(`Confirmar exclusão do pedido ${o.id}?`)) return;
+    if (!confirm(`Confirmar exclusão do pedido ${o.numeroPedido}?`)) return;
     this.api.deletarPagamento(o.id).subscribe({
       next: () => {
         this.reload()

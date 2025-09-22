@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-12">
                 <form class="row g-3" [formGroup]="form" (ngSubmit)="onSubmit()">
-                    <!-- CPF -->
+                    <!-- CPF
                     <div class="col-12 col-md-6">
                         <label class="form-label d-block mb-1">CPF</label>
                         <p-inputMask formControlName="cpf" mask="999.999.999-99" class="w-100"
@@ -26,7 +26,7 @@
                             *ngIf="form.controls['cpf'].hasError('cpfInvalido') && form.controls['cpf'].touched">
                             CPF inválido!
                         </small>
-                    </div>
+                    </div> -->
 
                     <!-- Nome -->
                     <div class="col-12 col-md-6">
@@ -40,12 +40,12 @@
                         <input pInputText formControlName="apelido" class="w-100" placeholder="Ex.: Juninho" />
                     </div>
 
-                    <!-- Email -->
+                    <!-- Email
                     <div class="col-12 col-md-6">
                         <label class="form-label d-block mb-1">Email</label>
                         <input pInputText type="email" formControlName="email" class="w-100"
                             placeholder="nome@dominio.com" />
-                    </div>
+                    </div> -->
 
                     <!-- Telefone -->
                     <div class="col-12 col-md-6">

@@ -14,8 +14,16 @@ export class OrderService {
         return this.http.post<OrderCreateResponse>(`${this.baseUrl}/guest/cj/orders`, payload);
     }
 
+    notifyPedido(): Observable<any> {
+        return this.http.post<any>(`${this.baseUrl}/guest/cj/orders/notify`, null);
+    }
+
     listarPedidos(): Observable<OrdersResponse> {
         return this.http.get<OrdersResponse>(`${this.baseUrl}/guest/cj/orders`);
+    }
+
+    getPedido(numeroPedido: string): Observable<OrdersResponse> {
+        return this.http.get<OrdersResponse>(`${this.baseUrl}/guest/cj/orders/${numeroPedido}/order`);
     }
 
     confirmarPagamento(id: string): Observable<OrderDTO> {
@@ -29,6 +37,15 @@ export class OrderService {
     deletarPagamento(id: string): Observable<OrderDTO> {
         return this.http.delete<OrderDTO>(`${this.baseUrl}/guest/cj/orders/${id}/delete`, {});
     }
+
+    entregarPedido(id: string): Observable<OrderDTO> {
+        return this.http.put<OrderDTO>(`${this.baseUrl}/guest/cj/orders/${id}/delivery`, {});
+    }
+
+    export(): Observable<any> {
+        return this.http.get(`${this.baseUrl}/guest/cj/orders/export`, { responseType: 'blob' });
+    }
+
 
 
 }

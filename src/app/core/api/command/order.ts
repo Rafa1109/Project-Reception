@@ -20,7 +20,7 @@ export interface OrderAmount {
  */
 export interface OrderCreateRequest extends OrderAmount {
     nomeCompleto: string;
-    email: string;
+    // email: string;
     telefone: string;
     produto: typeof PRODUTO_FIXO;    // "Hambúrguer CJ"
     opcaoPagamento: PaymentMethod;   // 'pix' | 'cartao'
@@ -46,10 +46,10 @@ export interface OrderCreateResponse {
 export interface OrderDTO extends OrderAmount {
     id: string;
     numeroPedido: string;
-    cpf: string;
+    // cpf: string;
     nomeCompleto: string;
     apelido: string;
-    email: string;
+    // email: string;
     telefone: string;
     produto: typeof PRODUTO_FIXO;   // "Hambúrguer CJ"
     opcaoPagamento: PaymentMethod;

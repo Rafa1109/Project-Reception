@@ -26,9 +26,9 @@ export class OrderFormComponent {
   readonly valorUnitario = VALOR_UNITARIO_FIXO;
 
   form = this.fb.nonNullable.group({
-    cpf: ['', [Validators.required, cpfValidator]],
+    // cpf: ['', [Validators.required, cpfValidator]],
     nomeCompleto: ['', [Validators.required, Validators.minLength(3)]],
-    email: ['', [Validators.required, Validators.email]],
+    // email: ['', [Validators.required, Validators.email]],
     telefone: ['', [Validators.required, phone11Validator]],
     produto: [{ value: PRODUTO_FIXO, disabled: true }], // fixo
     qtd: [1, [Validators.required, Validators.min(1)]],
@@ -52,10 +52,10 @@ export class OrderFormComponent {
     const raw = this.form.getRawValue();
 
     const payload = {
-      cpf: raw.cpf.replace(/\D/g, ''),
+      // cpf: raw.cpf.replace(/\D/g, ''),
       nomeCompleto: raw.nomeCompleto,
       apelido: raw.apelido,
-      email: raw.email,
+      // email: raw.email,
       telefone: raw.telefone,
       produto: raw.produto,                 // "Hambúrguer CJ"
       qtd: Number(raw.qtd) || 1,
@@ -70,19 +70,19 @@ export class OrderFormComponent {
         next: (res: OrderCreateResponse) => {
           // Abre modal conforme forma de pagamento e dados retornados
           if (payload.opcaoPagamento === 'PIX' && res.qrCodeUrl) {
-            this.paymentDlg?.open({ title: 'Pagamento via Pix', qrCodeUrl: res.qrCodeUrl, copiaECola: res.copiaECola, frase: "Quanto lhe for possível, não deixe de fazer o bem a quem dele precisa,Não diga ao seu próximo: Volte amanhã, e eu lhe darei algo, se pode ajudá-lo hoje: Provérbios 3:27,28" });
+            this.paymentDlg?.open({ title: 'Pagamento via Pix', qrCodeUrl: res.qrCodeUrl, copiaECola: res.copiaECola });
           } else if (payload.opcaoPagamento === 'CARTAO' && res.paymentLink) {
-            this.paymentDlg?.open({ title: 'Pagamento via Cartão', paymentLink: res.paymentLink, frase: "Quanto lhe for possível, não deixe de fazer o bem a quem dele precisa,Não diga ao seu próximo: Volte amanhã, e eu lhe darei algo, se pode ajudá-lo hoje: Provérbios 3:27,28" });
+            this.paymentDlg?.open({ title: 'Pagamento via Cartão', paymentLink: res.paymentLink });
           } else {
             this.paymentDlg?.open({ title: 'Detalhes de pagamento não disponíveis' });
           }
 
           // Reset mantendo defaults (produto fixo, qtd=1, opcaoPagamento padrão)
           this.form.reset({
-            cpf: '',
+            // cpf: '',
             nomeCompleto: '',
             apelido: '',
-            email: '',
+            // email: '',
             telefone: '',
             produto: 'Hambúrguer CJ',
             qtd: 1,

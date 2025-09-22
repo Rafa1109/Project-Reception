@@ -27,6 +27,19 @@ export class PaymentDialogComponent {
     this.visible = true;
   }
 
+  copiarCodigo(codigo: string | undefined) {
+    if (!codigo) return;
+    navigator.clipboard.writeText(codigo).then(() => {
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Copiado!',
+        detail: 'Código Pix copiado para a área de transferência',
+        life: 2000
+      });
+    });
+  }
+
+
   /** Copia o código Pix "copia e cola" para a área de transferência */
   copyPix() {
     const texto = this.data?.copiaECola;

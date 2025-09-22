@@ -13,17 +13,45 @@
         </div>
     </div>
 
+
+    <div class="col-12 d-md-block">
+        <form [formGroup]="form" (ngSubmit)="search()">
+            <label class="form-label d-block mb-1">Número do Pedido</label>
+
+            <div class="flex align-items-center mb-4 col-12 md:col-6">
+                <input type="text" pInputText formControlName="numeroPedido" placeholder="CJ000123"
+                    (keydown.enter)="search()" class="flex-1" />
+
+                <p-button label="Buscar" icon="pi pi-search" type="submit" styleClass="my-custom-button">
+                </p-button>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-12 col-md-4 d-md-block">
+                    <p-button label="Recarregar" icon="pi pi-refresh" (onClick)="clear()" styleClass="p-button-block">
+                    </p-button>
+                </div>
+                <div class="mb-3 col-12 col-md-4 d-md-block">
+                    <p-button label="Pedido" icon="pi pi-check" (onClick)="newOrder()" styleClass="p-button-block">
+                    </p-button>
+                </div>
+                <div class="mb-3 col-12 col-md-4 d-md-block">
+                    <p-button label="Notificar Pendencia" icon="pi pi-bell" (onClick)="notify()"
+                        styleClass="p-button-block">
+                    </p-button>
+                </div>
+                <div class="mb-3 col-12 col-md-4 d-md-block">
+                    <p-button label="Exportar" icon="pi pi-download" (onClick)="export()" styleClass="p-button-block">
+                    </p-button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <p-divider></p-divider>
+
     <div class="col-12">
         <div class="row">
             <div class="col-12">
-                <div class="row">
-                    <div class="mb-3 col-12 col-md-4 d-md-block">
-                        <p-button label="Recarregar" icon="pi pi-refresh" (onClick)="reload()"></p-button>
-                    </div>
-                    <div class="mb-3 col-12 col-md-4 d-md-block">
-                        <p-button label="Pedido" icon="pi pi-check" (onClick)="newOrder()"></p-button>
-                    </div>
-                </div>
 
                 <div class="row">
                     <!-- A receber -->
@@ -46,16 +74,17 @@
                     <div class="col-12 pr-0 table-responsive">
                         <p-table #table styleClass="p-datatable-striped" [rows]="7" [paginator]="true" [rowHover]="true"
                             [value]="orders" [totalRecords]="orders.length" [showCurrentPageReport]="true"
+                            [(first)]="first"
                             currentPageReportTemplate="Exibindo {first} ao {last} de {totalRecords} pedidos"
                             responsiveLayout="scroll">
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th>Pedido</th>
-                                    <th>CPF</th>
+                                    <!-- <th>CPF</th> -->
                                     <th>Nome</th>
                                     <th>Apelido</th>
                                     <!-- <th>Email</th> -->
-                                    <!-- <th>Telefone</th> -->
+                                    <th>Telefone</th>
                                     <th>Produto</th>
                                     <th>Valor</th>
                                     <th>Qtd</th>
@@ -68,29 +97,39 @@
                             </ng-template>
                             <ng-template pTemplate="body" let-o>
                                 <tr [ngClass]="{
+                  'row-entregue': o.statusPagamento === 'ENTREGUE',
                   'row-confirmado': o.statusPagamento === 'CONFIRMADO',
                   'row-cancelado': o.statusPagamento === 'CANCELADO',
                   'row-pendente': o.statusPagamento === 'PENDENTE'
                 }">
                                     <td>{{ o.numeroPedido }}</td>
-                                    <td>{{ o.cpf }}</td>
+                                    <!-- <td>{{ o.cpf }}</td> -->
                                     <td>{{ o.nomeCompleto }}</td>
                                     <td>{{ o.apelido }}</td>
                                     <!-- <td>{{ o.email }}</td> -->
-                                    <!-- <td>{{ o.telefone }}</td> -->
+                                    <td>{{ o.telefone }}</td>
                                     <td>{{ o.produto }}</td>
-                                    <td>{{ (o.valorUnitario | number) | currency:'BRL':'symbol-narrow':'1.2-2' }}
+                                    <td>{{ (o.valorUnitario | number) |
+                                        currency:'BRL':'symbol-narrow':'1.2-2' }}
                                     </td>
                                     <td>{{ o.qtd }}</td>
-                                    <td>{{ (o.valorTotal | number) | currency:'BRL':'symbol-narrow':'1.2-2' }}</td>
+                                    <td>{{ (o.valorTotal | number) | currency:'BRL':'symbol-narrow':'1.2-2'
+                                        }}</td>
                                     <td>{{ o.opcaoPagamento }}</td>
                                     <td>{{ o.statusPagamento }}</td>
                                     <td>{{ o.createdDate | date:'dd/MM/yyyy HH:mm' }}</td>
                                     <td>
                                         <div class="flex gap-2">
+
                                             <button pButton type="button" label="Confirmar" icon="pi pi-check"
-                                                class="p-button-success p-button-sm" (click)="confirmar(o)"
-                                                [disabled]="o.statusPagamento === 'CONFIRMADO'">
+                                                class="p-button-success p-button-sm" (click)="confirmar(o)" [disabled]="o.statusPagamento === 'CONFIRMADO' 
+                                                || o.statusPagamento === 'ENTREGUE'
+                                                || o.statusPagamento === 'CANCELADO'">
+                                            </button>
+
+                                            <button pButton type="button" label="Entregar" icon="pi pi-check"
+                                                class="p-button-success p-button-sm" (click)="entregar(o)"
+                                                [disabled]="o.statusPagamento !== 'CONFIRMADO'">
                                             </button>
 
                                             <button pButton type="button" label="Cancelar" icon="pi pi-times"

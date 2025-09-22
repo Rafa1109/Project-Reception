@@ -34,6 +34,7 @@ export class OrdersListComponent {
 
   first = 0;
   reload() {
+    this.form.reset({ numeroPedido: '' });
     this.first = 0;
     this.loading = true;
     this.api.listarPedidos()
@@ -50,6 +51,20 @@ export class OrdersListComponent {
       });
   }
 
+
+  getStatusSeverity(status: string): string {
+    switch (status) {
+      case 'CONFIRMADO':
+      case 'ENTREGUE':
+        return 'success'; // Verde
+      case 'CANCELADO':
+        return 'danger'; // Vermelho
+      case 'PENDENTE':
+        return 'warning'; // Laranja
+      default:
+        return 'info'; // Azul (ou outra cor padrão)
+    }
+  }
 
   search(): void {
     this.first = 0;
@@ -74,7 +89,6 @@ export class OrdersListComponent {
   }
 
   clear(): void {
-    this.form.reset({ numeroPedido: '' });
     this.reload();
   }
 

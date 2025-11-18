@@ -65,8 +65,8 @@
             </div>
         </div>
 
-        <p-table #table [rows]="10" [paginator]="true" [rowHover]="true" [value]="orders" [totalRecords]="orders.length"
-            [showCurrentPageReport]="true" [(first)]="first"
+        <p-table #table [rows]="100" [paginator]="true" [rowHover]="true" [value]="orders"
+            [totalRecords]="orders.length" [showCurrentPageReport]="true" [(first)]="first"
             currentPageReportTemplate="Exibindo {first} ao {last} de {totalRecords} pedidos" responsiveLayout="stack"
             styleClass="p-datatable-striped">
             <ng-template pTemplate="header">

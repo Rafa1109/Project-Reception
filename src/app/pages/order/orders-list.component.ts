@@ -55,6 +55,7 @@ export class OrdersListComponent {
   getStatusSeverity(status: string): string {
     switch (status) {
       case 'CONFIRMADO':
+        return 'info'; // Verde
       case 'ENTREGUE':
         return 'success'; // Verde
       case 'CANCELADO':
